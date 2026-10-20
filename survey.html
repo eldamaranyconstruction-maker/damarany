@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>نموذج حصر الكميات والمساحات | الضمراني V8</title>
+<style>
+:root{--navy:#12366f;--green:#174a37;--bg:#f2f4f6;--line:#d9dee4;--muted:#6b7280}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Tahoma,Arial,sans-serif;color:#20252b}.app{max-width:900px;margin:auto;padding:14px}.hero,.panel{background:white;border-radius:18px;padding:20px;margin-bottom:14px;box-shadow:0 4px 18px #0000000a}.hero{text-align:center}.brand{display:flex;justify-content:center;align-items:center;gap:15px;margin:18px auto}.logo{width:82px;height:72px;border-radius:14px;background:var(--navy);color:white;display:grid;place-items:center;font-size:38px;font-weight:bold;position:relative}.logo:after{content:'━';position:absolute;color:#ddd;transform:rotate(-35deg);font-size:54px}.brandname{font-family:Georgia,serif;font-size:26px;color:#4b4b4b;direction:ltr}.subhead{color:#777}.panel h2{font-size:20px;margin:0 0 15px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field label{display:block;font-weight:bold;font-size:14px;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:white}.field textarea{min-height:76px}.num{background:#f0f0f0;border-radius:25px;padding:10px 15px;display:inline-block;font-weight:bold}.street,.item{border:1px solid var(--line);border-radius:14px;padding:15px;margin:12px 0}.street-media{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.photo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px}.photo-card{position:relative}.photo-card img{width:100%;height:110px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}.photo-card button{position:absolute;top:3px;left:3px;padding:4px 7px}.sketch-preview{max-width:100%;max-height:180px;margin-top:8px;border:1px solid var(--line);border-radius:8px}.share-queue{margin-top:10px;padding:12px;border:1px dashed var(--line);border-radius:10px}.width-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.location-link{display:inline-block;margin-top:6px;color:#174a37;font-weight:bold}.measure-actions{display:flex;gap:8px;flex-wrap:wrap}.street .field input[type=file]{padding:8px}.street-photo-label{display:block;font-weight:bold;font-size:14px;margin-bottom:6px}.streethead,.itemhead{display:flex;justify-content:space-between;align-items:center;gap:8px}.rowtable{overflow-x:auto;margin-top:12px}table{border-collapse:collapse;width:100%;min-width:620px;font-size:13px}th,td{border:1px solid #333;padding:8px;text-align:center}th{background:#f0f1f3}td input{width:85px;max-width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;text-align:center;font:inherit}.btn{border:0;border-radius:10px;padding:12px 15px;font:inherit;font-weight:bold;cursor:pointer;margin:4px 0}.add{background:#edf2ef;color:#183c2d}.primary{background:var(--green);color:white;width:100%;padding:15px}.secondary{background:#e6f1e9;color:#174a37}.danger{background:#fff0f0;color:#ad3030}.actions{display:grid;grid-template-columns:1fr;gap:8px}.summary-title{margin-top:22px}.small{color:var(--muted);font-size:12px}.summarytable{min-width:0}.summarytable input{width:100%}.footer{text-align:center;color:#777;font-size:11px;margin:15px}.hidden{display:none!important}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#17232e;color:white;padding:12px 16px;border-radius:10px;display:none;z-index:20;max-width:90%;text-align:center}
+@media(max-width:600px){.app{padding:9px}.hero,.panel{padding:14px}.grid{grid-template-columns:1fr}.street-media{grid-template-columns:1fr}.brandname{font-size:21px}.logo{width:64px;height:60px}.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{
+ @page{size:A4 portrait;margin:12mm 11mm 14mm}
+ html,body{background:#fff!important;color:#111!important;font-family:Tahoma,Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .app{width:100%;max-width:none;padding:0;margin:0}
+ .hero,.panel{background:#fff!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0 0 7mm!important;border:0!important}
+ .hero{text-align:center;padding-bottom:5mm!important;border-bottom:1px solid #999!important}
+ .hero h2{font-size:17pt;margin:0 0 3mm}
+ .subhead{font-size:10pt;color:#333!important}
+ .hero .brand{margin:4mm auto;gap:4mm}
+ .logo{width:17mm;height:15mm;font-size:20pt;border-radius:2mm}
+ .brandname{font-size:19pt;color:#333!important}
+ .no-print,.btn,.num,.no-print-field,.toast,.share-queue{display:none!important}
+ .field input,.field select,.field textarea{border:0!important;border-radius:0!important;padding:1mm 0!important;background:transparent!important;color:#111!important;box-shadow:none!important}
+ .field label{font-size:9pt;margin-bottom:1mm}
+ .street,.item{break-inside:auto!important;page-break-inside:auto!important;border:0!important;border-bottom:0!important;padding:0!important;margin:4mm 0!important}
+ .streethead,.itemhead{margin-bottom:2mm}
+ .streethead strong,.itemhead strong{font-size:11pt}
+ .street-media{display:block;margin-top:2mm}
+ .street-media .field{margin:1mm 0}
+ .rowtable{overflow:visible!important;margin-top:2mm}
+ table,table.summarytable{width:100%!important;min-width:0!important;border-collapse:collapse!important;table-layout:auto;font-size:8.5pt!important;break-inside:auto}
+ thead{display:table-header-group}
+ tr{break-inside:avoid;page-break-inside:avoid}
+ th,td{border:1px solid #333!important;padding:2mm 1.5mm!important;text-align:center;vertical-align:middle;overflow-wrap:anywhere}
+ th{background:#edf0f2!important;font-weight:bold}
+ td input{border:0!important;width:100%!important;padding:0!important;font-size:8.5pt!important;text-align:center}
+ .summary-page{break-before:page!important;page-break-before:always!important;break-inside:auto!important;page-break-inside:auto!important}
+ .summary-page h2{font-size:12pt;margin:4mm 0 2mm!important;break-after:avoid-page;page-break-after:avoid}
+ .summarytable{font-size:9pt!important}
+ .summarytable th,.summarytable td{padding:2.2mm 1.5mm!important}
+ .photo-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:2mm}
+ .photo-card img{height:28mm;object-fit:cover}
+ .sketch-preview{max-height:45mm}
+ .location-link{color:#111!important;text-decoration:none;font-size:8pt}
+ .footer{position:static!important;text-align:center;font-size:7pt;margin-top:4mm;color:#555!important}
+ .panel h2{font-size:12pt;margin:0 0 3mm}
+}
+#dkToast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#17232e;color:#fff;padding:11px 16px;border-radius:10px;font-size:13px;display:none;z-index:2147483000;max-width:90%;text-align:center;font-family:Tahoma,Arial,sans-serif;line-height:1.6}
+#dkBusy{position:fixed;inset:0;background:#0006;display:none;align-items:center;justify-content:center;z-index:2147482000}
+#dkBusy>div{background:#fff;padding:18px 22px;border-radius:14px;display:flex;gap:10px;align-items:center;font-family:Tahoma,Arial,sans-serif;max-width:85%}
+.dk-spin{width:20px;height:20px;flex:none;border:3px solid #ddd;border-top-color:#174a37;border-radius:50%;animation:dkspin .8s linear infinite}
+@keyframes dkspin{to{transform:rotate(360deg)}}
+.dk-overlay{position:fixed;inset:0;background:#000a;display:flex;align-items:center;justify-content:center;z-index:2147482500;padding:16px}
+.dk-sheet{background:#fff;border-radius:16px;padding:18px;width:min(380px,100%);font-family:Tahoma,Arial,sans-serif;direction:rtl;color:#18221d;max-height:90vh;overflow:auto}
+.dk-sheet h3{margin:0 0 6px;font-size:18px}.dk-sheet label{display:block;font-weight:700;font-size:13px;margin:10px 0 5px}
+.dk-sheet input,.dk-sheet select{width:100%;padding:12px;border:1px solid #d8dedb;border-radius:10px;font:inherit;font-size:16px;background:#fff}
+.dk-muted{color:#6b7280;font-size:12px;margin:0;line-height:1.6}.dk-err{color:#c62828;font-size:13px;min-height:18px;margin-top:8px}
+.dk-btn{width:100%;border:0;border-radius:10px;padding:13px;background:#174a37;color:#fff;font:inherit;font-weight:700;margin-top:6px;cursor:pointer}
+.dk-btn.light{background:#eef1ef;color:#1e2d24}
+.dk-btn:disabled{opacity:.6}
+.dk-sync{display:none;align-items:center;gap:8px;flex-wrap:wrap;border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:13px;line-height:1.6;font-family:Tahoma,Arial,sans-serif}
+.dk-sync.ok{display:flex;background:#e8f5e9;color:#1b5e20;border:1px solid #c8e6c9}
+.dk-sync.wait{display:flex;background:#fff8e1;color:#7a5200;border:1px solid #ffe082}
+.dk-sync.err{display:flex;background:#ffebee;color:#b71c1c;border:1px solid #ffcdd2}
+.dk-sync.info{display:flex;background:#eef3f7;color:#2b4255;border:1px solid #dbe4ec}
+.dk-sync span{flex:1;min-width:160px}
+.dk-sync button{border:0;border-radius:8px;padding:7px 11px;font:inherit;font-size:12px;font-weight:700;background:#fff;color:inherit;cursor:pointer;width:auto;margin:0}
+@media print{#dkToast,#dkBusy,.dk-overlay,.dk-sync{display:none!important}}
+.sv-row{display:block;width:100%;text-align:right;background:#f6f8f7;border:1px solid #e3e8e5;border-radius:10px;padding:10px 12px;margin:0 0 8px;font:inherit;font-size:13px;cursor:pointer;line-height:1.7;color:#20252b}.sv-row span{color:#6b7280;font-size:12px}.unit-hint{margin-top:4px}.btn.cloud{background:#12366f;color:#fff;width:100%;padding:15px}.btn:disabled{opacity:.5}
+.ci{border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0;background:#fcfdfc}.ci.held{background:#fff8e1;border-color:#ffe082}.ci.noprice input[data-f=price]{border-color:#e9a23b;background:#fffaf0}
+.ci-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}.ci-head b{flex:1;font-size:15px}.ci-auto{font-size:11px;background:#e2f0ff;color:#1d6fb5;border-radius:999px;padding:3px 8px}
+.ci-held{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:bold;cursor:pointer}.ci-held input{width:18px;height:18px}.ci-del{padding:6px 10px;margin:0}
+.grid.ci-grid3{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:6px}@media(max-width:600px){.grid.ci-grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ci textarea{min-height:56px}.ci-calc{font-size:12px;background:#f2f6f4;border-radius:8px;padding:8px 10px;margin:8px 0 2px;line-height:1.9}.ci-warn{color:#b56b00;font-weight:bold}
+#claimTotals{background:#f6f8f7;border:1px solid #e3e8e5;border-radius:12px;padding:12px;line-height:1.9;margin:10px 0;font-size:14px}
+#claimHead details{border:1px dashed var(--line);border-radius:12px;padding:10px 12px;margin:10px 0}#claimHead summary{cursor:pointer;font-weight:bold;font-size:14px}
+.dk-wa{background:#168447}.dk-wa-preview{white-space:pre-wrap;background:#f6f8f7;border:1px solid #e3e8e5;border-radius:10px;padding:10px;font-size:12px;max-height:38vh;overflow:auto;font-family:inherit;direction:rtl;text-align:right;margin:10px 0 4px}
+</style></head><body><div class="app" id="app">
+<section class="hero"><h2>نموذج حصر الكميات والمساحات</h2><div class="subhead">شركة الضمراني للمقاولات ورصف الطرق — إدارة المساحة والحصر</div><div class="brand"><div class="logo">D</div><div class="brandname">EL DAMARANY</div></div><div class="small">تقرير حصر كميات — نسخة قابلة للطباعة والمشاركة</div></section>
+<div id="syncBox" class="dk-sync"></div>
+<section class="panel"><h2>1 — بيانات الحصر والمشروع</h2><div class="grid"><div class="field"><label>رقم الحصر</label><input id="surveyNo" placeholder="بيتعمل تلقائي"></div><div class="field"><label>نوع الحصر *</label><select id="surveyType"><option>حصر ابتدائي</option><option>حصر نهائي</option><option>حصر مراجعة</option></select></div><div class="field"><label>المشروع الرئيسي *</label><input id="project" placeholder="اسم المشروع الرئيسي"></div><div class="field"><label>المشروع الفرعي (إن وجد)</label><input id="subProject" placeholder="اسم الشارع أو المشروع الفرعي — اختياري"></div><div class="field"><label>التاريخ *</label><input id="date" type="date"></div><div class="field"><label>اسم المساح / المهندس *</label><input id="surveyor" placeholder="اسم أخصائي المساحة"></div><div class="field"><label>ملاحظات عامة</label><input id="generalNotes" placeholder="ملاحظات الحصر"></div></div></section>
+<section class="panel"><div class="streethead"><h2>2 — الشوارع والبنود</h2><button class="btn add no-print" onclick="addStreet()">＋ إضافة شارع جديد</button></div><div id="streets"></div><button class="btn add no-print" onclick="addStreet()">＋ إضافة شارع جديد</button><button class="btn add no-print" onclick="addItem()">＋ إضافة بند جديد</button></section>
+<section class="panel summary-page" id="summaryPanel"><h2>ملخص إجمالي الحصر</h2><div id="summary"></div></section>
+<section class="panel no-print" id="claimPanel"><h2>3 · المستخلص (للتقديم للجهة)</h2><p class="small">الكميات بتتحسب لوحدها من الحصر اللي فوق (بنجمّع نفس رقم البند من كل الشوارع، والقياس اللي رقمه «1+2» بيتحسب للبندين). اكتب الفئة والمنظور والسابق مرة واحدة، والمستخلص اللي بعده بيتنقل بنفس البيانات.</p>
+<div id="claimHead"><div class="grid"><div class="field"><label>نوع المستخلص</label><select data-h="type"><option>جاري</option><option>ختامي</option></select></div><div class="field"><label>رقم المستخلص</label><input data-h="no" inputmode="numeric"></div><div class="field"><label>المدة من</label><input type="date" data-h="from"></div><div class="field"><label>حتى</label><input type="date" data-h="to"></div></div>
+<details><summary>بيانات رأس المستخلص والتوقيعات</summary><div class="grid" style="margin-top:10px"><div class="field"><label>العملية</label><input data-h="operation" placeholder="مثال: رصف الطرق والأرصفة بنطاق حي منتزه ثان (١) الخطة الاستثمارية ٢٠٢٣/٢٠٢٤"></div><div class="field"><label>المقاول</label><input data-h="contractor"></div><div class="field"><label>الجهة (السطر الأول)</label><input data-h="authority1"></div><div class="field"><label>الجهة (السطر التاني)</label><input data-h="authority2"></div><div class="field"><label>الإدارة (السطر التالت)</label><input data-h="authority3"></div><div class="field"><label>ملاحظة أعلى الجدول</label><input data-h="topNote"></div><div class="field"><label>سطر الاعتماد تحت التوقيعات</label><input data-h="approveNote"></div><div class="field"><label>المعتمِد</label><input data-h="approver"></div><div class="field" style="grid-column:1/-1"><label>عمود الملاحظات (كل سطر بيروح لصف بالترتيب من أول الجدول، زي الورقة)</label><textarea data-h="remarks" rows="6"></textarea></div></div></details></div>
+<button class="btn secondary" style="width:100%" onclick="claimFromPrevious()">↩️ جيب البيانات من المستخلص اللي قبله</button>
+<div id="claimItems"></div><button class="btn add" style="width:100%" onclick="claimAddItem()">＋ إضافة بند يدوي (مش في الحصر ده)</button>
+<div id="claimTotals"></div>
+<div class="actions"><button class="btn primary" onclick="shareClaimPdf()">🧾 PDF المستخلص بالخصومات (تحميل وإرسال)</button><button class="btn secondary" onclick="printClaim()">🖨️ طباعة المستخلص / حفظ PDF</button></div></section>
+<section class="panel no-print"><h2>إخراج كشف الحصر</h2><div class="actions"><button class="btn cloud" onclick="saveToServer()">☁️ حفظ في السيستم</button><button class="btn secondary" onclick="openSaved()">📂 فتح حصر محفوظ</button><button class="btn secondary" onclick="newSurvey()">🆕 حصر جديد</button><button class="btn primary" onclick="surveyPdfNow()">📐 PDF الحصر + المستخلص المبدئي (تحميل وإرسال)</button><button class="btn secondary" onclick="shareNextAttachment()">📎 إرسال الصور واللوكيشن والكروكي بعد PDF</button><div id="shareQueue" class="share-queue small">بعد إرسال ملف PDF، اضغط زر إرسال المرفقات لمشاركة صور كل شارع ثم موقعه وكروكيه بشكل منفصل، مع اسم الشارع.</div><button class="btn secondary" onclick="printHasr()">🖨️ طباعة كشف الحصر</button><button class="btn secondary" onclick="exportCsv()">📊 تصدير جدول Excel (CSV)</button><button class="btn secondary" onclick="saveLocal()">💾 تنزيل نسخة احتياطية (ملف)</button><button class="btn secondary" onclick="document.getElementById('importFile').click()">📥 استيراد نسخة احتياطية</button><input class="hidden" id="importFile" type="file" accept="application/json" onchange="importLocal(event)"><p class="small">بعد «حفظ في السيستم» الـ PDF بيطلع لوحده بالبيانات اللي اتحفظت: تقدر تحمّله، أو تبعته للرقمين على واتساب برسالة فيها لينك الملف. زرار «PDF الحصر» بيطلّعه في أي وقت حتى قبل الحفظ.</p></div></section>
+<div class="footer">شركة الضمراني للمقاولات ورصف الطرق — نموذج حصر الكميات والمساحات</div></div><div class="toast" id="toast"></div>
+<script>
+const PIN_ROLE='field';
+// ================= الاتصال بالسيستم (Google Sheets) =================
+// الصق هنا رابط Web App اللي هتاخده من Apps Script (بينتهي بـ /exec)
+const API_URL = 'https://script.google.com/macros/s/AKfycbwmp0dESFjbzXfsjB_TRgWRx86PvrkfYsxefDVy8wxjYqVd3WO76gj_gGuRIhXZ1G0_/exec';
+const PIN_KEY = 'damarany_pin_' + PIN_ROLE;
+const NAME_KEY = 'damarany_user_name';
+
+function dkLS(k, v) { try { if (v === undefined) return localStorage.getItem(k) || ''; if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { return ''; } }
+function dkGetPin() { return dkLS(PIN_KEY); }
+function dkGetName() { return dkLS(NAME_KEY); }
+function dkErr(code, msg) { const e = new Error(msg); e.code = code; return e; }
+function dkEsc(s) { return String(s ?? '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
+
+async function dkApi(action, payload) {
+  if (!API_URL) throw dkErr('NO_API', 'السيستم لسه مش متوصل. حط رابط API_URL في أول الملف.');
+  let res, j;
+  try {
+    res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(Object.assign({ action, pin: dkGetPin(), by: dkGetName() }, payload || {})) });
+  } catch (e) { throw dkErr('NETWORK', 'مفيش اتصال بالإنترنت'); }
+  try { j = await res.json(); } catch (e) { throw dkErr('NETWORK', 'السيستم مردش صح، جرب تاني'); }
+  if (!j.ok) {
+    if (j.code === 'BAD_PIN') dkLS(PIN_KEY, null);
+    throw dkErr(j.code || 'ERROR', j.error || 'حصل خطأ');
+  }
+  return j;
+}
+
+function dkToast(t, ms) {
+  let x = document.getElementById('dkToast');
+  if (!x) { x = document.createElement('div'); x.id = 'dkToast'; document.body.appendChild(x); }
+  x.textContent = t; x.style.display = 'block';
+  clearTimeout(x._t); x._t = setTimeout(() => x.style.display = 'none', ms || 2800);
+}
+
+function dkBusy(on, text) {
+  let x = document.getElementById('dkBusy');
+  if (!x) { x = document.createElement('div'); x.id = 'dkBusy'; x.innerHTML = '<div><span class="dk-spin"></span><b></b></div>'; document.body.appendChild(x); }
+  x.querySelector('b').textContent = text || 'جارٍ الحفظ…';
+  x.style.display = on ? 'flex' : 'none';
+}
+
+let dkPinPromise = null;
+// يطلب رمز الدخول (ومعاه الاسم لو مطلوب) ويتأكد منه من السيستم
+function dkAskPin(opts) {
+  opts = opts || {};
+  if (dkPinPromise) return dkPinPromise;
+  dkPinPromise = new Promise(resolve => {
+    const ov = document.createElement('div');
+    ov.className = 'dk-overlay';
+    ov.innerHTML = `<div class="dk-sheet"><h3>${dkEsc(opts.title || 'رمز الدخول')}</h3>
+      <p class="dk-muted">${dkEsc(opts.hint || 'الرمز بيتطلب مرة واحدة على الجهاز ده.')}</p>
+      ${opts.askName ? `<label>اسمك</label><input id="dkName" autocomplete="name" placeholder="الاسم اللي هيظهر في السجل" value="${dkEsc(dkGetName())}">` : ''}
+      <label>الرمز</label><input id="dkPin" type="password" inputmode="numeric" autocomplete="off" placeholder="••••••">
+      <div class="dk-err" id="dkPinErr"></div>
+      <button type="button" class="dk-btn" id="dkPinGo">دخول</button></div>`;
+    document.body.appendChild(ov);
+    const pinEl = ov.querySelector('#dkPin'), err = ov.querySelector('#dkPinErr'), go = ov.querySelector('#dkPinGo');
+    setTimeout(() => (opts.askName && !dkGetName() ? ov.querySelector('#dkName') : pinEl).focus(), 50);
+    const submit = async () => {
+      const pin = pinEl.value.trim();
+      const name = opts.askName ? ov.querySelector('#dkName').value.trim() : dkGetName();
+      if (opts.askName && !name) { err.textContent = 'اكتب اسمك'; return; }
+      if (!pin) { err.textContent = 'اكتب الرمز'; return; }
+      dkLS(PIN_KEY, pin); if (name) dkLS(NAME_KEY, name);
+      go.disabled = true; go.textContent = 'جارٍ التأكد…'; err.textContent = '';
+      try {
+        await dkApi('ping', { need: PIN_ROLE });
+      } catch (e) {
+        go.disabled = false; go.textContent = 'دخول';
+        if (e.code === 'NETWORK') { dkToast('مفيش نت دلوقتي. الرمز اتسجل وهيتأكد أول ما النت يرجع'); }
+        else { err.textContent = e.code === 'BAD_PIN' ? 'الرمز غلط' : e.message; return; }
+      }
+      ov.remove(); dkPinPromise = null; resolve(pin);
+    };
+    go.onclick = submit;
+    pinEl.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+  });
+  return dkPinPromise;
+}
+
+// يتأكد إن فيه رمز متسجل قبل أي شغل مع السيستم
+async function dkEnsurePin(opts) {
+  if (!API_URL) return false;
+  if (dkGetPin() && (!opts || !opts.askName || dkGetName())) return true;
+  await dkAskPin(opts);
+  return true;
+}
+
+// يكرر الطلب لو الرمز اتغير
+async function dkCall(action, payload, opts) {
+  try { return await dkApi(action, payload); }
+  catch (e) {
+    if (e.code !== 'BAD_PIN') throw e;
+    dkToast('الرمز اتغير، ادخل الرمز الجديد');
+    await dkAskPin(opts);
+    return dkApi(action, payload);
+  }
+}
+
+// تصغير الصور قبل الرفع (بيوفر نت ومساحة)
+function dkShrinkImage(file, maxSide, quality) {
+  maxSide = maxSide || 1600; quality = quality || 0.75;
+  return new Promise((resolve) => {
+    const fr = new FileReader();
+    fr.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const s = Math.min(1, maxSide / Math.max(img.width, img.height));
+        const c = document.createElement('canvas');
+        c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        try { resolve(c.toDataURL('image/jpeg', quality)); } catch (e) { resolve(fr.result); }
+      };
+      img.onerror = () => resolve(fr.result);
+      img.src = fr.result;
+    };
+    fr.onerror = () => resolve('');
+    fr.readAsDataURL(file);
+  });
+}
+function dkDataUrlParts(d) { const m = /^data:([^;]+);base64,(.*)$/.exec(d || ''); return m ? { mime: m[1], base64: m[2] } : null; }
+// =====================================================================
+
+let streetCounter=0,itemCounter=0;const $=id=>document.getElementById(id);$('date').value=new Date().toISOString().slice(0,10);
+function toast(t){let x=$('toast');x.textContent=t;x.style.display='block';clearTimeout(x._t);x._t=setTimeout(()=>x.style.display='none',2600)}
+
+// ===== الوحدات: كل وحدة ليها طريقة حساب =====
+const UNIT_MODE={'م²':'area','م.ط':'len','م³':'vol','طن':'qty','عدد':'qty'};
+const UNIT_HINT={area:'الكمية = الطول × متوسط العرض',len:'الكمية = مجموع الأطوال',vol:'الكمية = الطول × متوسط العرض × العمق',qty:'الكمية بتتكتب مباشرة لكل صف'};
+function unitMode(u){return UNIT_MODE[u]||'area'}
+function usesWidths(mode){return mode==='area'||mode==='vol'}
+
+function addStreet(data={}){streetCounter++;let id=streetCounter;let el=document.createElement('div');el.className='street';el.dataset.id=id;el.innerHTML=`<div class="streethead"><strong>الشارع <span class="street-num">${id}</span></strong><button class="btn danger no-print" onclick="if(confirm('حذف الشارع ده بكل بنوده وصوره؟')){this.closest('.street').remove();renumber();updateSummary();markDirty()}">حذف الشارع</button></div><div class="field"><label>اسم الشارع</label><input class="street-name" placeholder="اسم الشارع / القطاع" value="${esc(data.name||'')}"></div><div class="street-media"><div class="field"><label>لوكيشن الشارع</label><input class="street-location" placeholder="الصق رابط الخريطة أو الإحداثيات" value="${esc(data.location||'')}"><div class="measure-actions no-print"><button type="button" class="btn add pin-btn" onclick="getStreetLocation(this.closest('.street'))">📍 تحديد الموقع بالدبوس</button><button type="button" class="btn add no-print" onclick="openStreetMap(this.closest('.street'))">🗺️ فتح الخريطة</button></div><a class="location-link ${data.location?'':'hidden'}" target="_blank" rel="noopener">📍 فتح موقع الشارع على الخريطة</a><div class="small">يمكن تحديد موقعك الحالي أو لصق رابط الموقع يدويًا.</div></div><div class="field no-print-field"><label class="street-photo-label">صور الشارع من الاستوديو / المعرض</label><input class="street-photos-input" type="file" accept="image/*" multiple><div class="small">اختر صورة واحدة أو عدة صور من معرض الهاتف، وستظهر ضمن تقرير الشارع.</div></div></div><div class="photo-grid">${(data.photos||[]).map((src,i)=>photoCard(src,i)).join('')}</div><div class="field no-print-field" style="margin-top:10px"><label>كروكي الشارع (صورة أو PDF)</label><input class="street-sketch-input" type="file" accept="image/*,application/pdf"><div class="small sketch-name">${esc(data.sketchName||'لم يتم إرفاق كروكي')}</div><div class="sketch-preview-wrap"></div></div><div class="items"></div><button class="btn add no-print" onclick="addItem(this.closest('.street'))">＋ إضافة بند لهذا الشارع</button>`;$('streets').appendChild(el);let loc=el.querySelector('.street-location');loc.addEventListener('input',()=>{let a=el.querySelector('.location-link');a.href=mapUrl(loc.value);a.classList.toggle('hidden',!loc.value.trim())});if(data.location){let a=el.querySelector('.location-link');a.href=mapUrl(data.location);a.classList.remove('hidden')}el.querySelector('.street-photos-input').addEventListener('change',e=>handleStreetPhotos(e,el));el.dataset.sketch=data.sketch||'';el.dataset.sketchName=data.sketchName||'';el.dataset.sketchType=data.sketchType||'';el.dataset.sketchUrl=data.sketchUrl||'';renderSketch(el);el.querySelector('.street-sketch-input').addEventListener('change',e=>handleSketch(e,el));if(data.items?.length)data.items.forEach(x=>addItem(el,x));else addItem(el);updateSummary()}
+function renderSketch(street){let wrap=street.querySelector('.sketch-preview-wrap'),src=street.dataset.sketch,type=street.dataset.sketchType||'';if(!src){wrap.innerHTML='';return}if(type.startsWith('image/'))wrap.innerHTML=`<img class="sketch-preview" src="${esc(src)}" alt="كروكي الشارع">`;else if(/^https?:/i.test(street.dataset.sketchUrl||src))wrap.innerHTML=`<a class="location-link" target="_blank" rel="noopener" href="${esc(street.dataset.sketchUrl||src)}">📄 فتح الكروكي</a>`;else wrap.innerHTML=''}
+function mapUrl(v){let s=String(v||'').trim();if(/^https?:\/\//i.test(s))return s;return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s)}
+function openStreetMap(street){let v=street.querySelector('.street-location').value.trim();if(!v){toast('حدد الموقع بالدبوس أو اكتب الإحداثيات أولًا');return}window.open(mapUrl(v),'_blank','noopener')}
+function getStreetLocation(street){let input=street.querySelector('.street-location');if(!navigator.geolocation){toast('المتصفح لا يدعم تحديد الموقع؛ يمكنك لصق رابط الخريطة أو الإحداثيات');return}toast('جارٍ تحديد الموقع…');navigator.geolocation.getCurrentPosition(pos=>{input.value=pos.coords.latitude.toFixed(6)+','+pos.coords.longitude.toFixed(6);input.dispatchEvent(new Event('input',{bubbles:true}));toast('تم تسجيل إحداثيات الشارع')},err=>{toast(err.code===1?'اسمح للمتصفح بالوصول إلى الموقع، أو اختر الموقع من خرائط Google':'تعذر تحديد الموقع؛ يمكنك إدخال رابط الخريطة يدويًا')},{enableHighAccuracy:true,timeout:12000,maximumAge:0})}
+function photoCard(src,i){return `<div class="photo-card"><img src="${esc(src)}" alt="صورة الشارع"><button type="button" class="btn danger no-print" onclick="removePhoto(this)">×</button></div>`}
+function removePhoto(btn){if(!confirm('حذف الصورة دي؟'))return;btn.closest('.photo-card').remove();markDirty()}
+async function handleStreetPhotos(e,street){let files=[...e.target.files].filter(f=>f.type.startsWith('image/'));e.target.value='';if(!files.length)return;toast('جارٍ تجهيز الصور…');let grid=street.querySelector('.photo-grid');for(const file of files){let src=await dkShrinkImage(file,1600,0.75);if(src)grid.insertAdjacentHTML('beforeend',photoCard(src,grid.children.length))}markDirty();toast('تمت إضافة '+files.length+' صورة')}
+async function handleSketch(e,street){let f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;let data,type=f.type;if(type.startsWith('image/')){data=await dkShrinkImage(f,2400,0.85);type='image/jpeg'}else{if(f.size>15*1024*1024){toast('ملف الكروكي كبير جدًا (أكتر من 15 ميجا)');return}data=await new Promise(r=>{let fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(f)})}street.dataset.sketch=data;street.dataset.sketchName=f.name;street.dataset.sketchType=type;street.dataset.sketchUrl='';street.querySelector('.sketch-name').textContent=f.name;renderSketch(street);markDirty();toast('تم إرفاق كروكي الشارع')}
+
+function itemHeadHtml(mode,count){if(mode==='len')return `<th>البيان</th><th>الطول (م)</th>`;if(mode==='qty')return `<th>البيان</th><th>الكمية</th>`;let h=`<th>الطول (م)</th>${Array.from({length:count},(_,i)=>`<th>العرض ${i+1} (م)</th>`).join('')}<th>متوسط العرض (م)</th>`;if(mode==='vol')h+=`<th>العمق (م)</th><th>الحجم (م³)</th>`;else h+=`<th>المسطح (م²)</th>`;return h}
+function numInput(cls,v,label,extra=''){return `<input type="number" min="0" step="0.01" inputmode="decimal" class="${cls}" value="${esc(v??'')}" aria-label="${label}" ${extra}>`}
+function rowHtml(mode,count,r={}){if(mode==='len')return `<td><input class="desc" value="${esc(r.desc||'')}" placeholder="اختياري" aria-label="البيان"></td><td>${numInput('length',r.length,'الطول')}</td>`;if(mode==='qty')return `<td><input class="desc" value="${esc(r.desc||'')}" placeholder="اختياري" aria-label="البيان"></td><td>${numInput('qty',r.qty,'الكمية')}</td>`;let h=`<td>${numInput('length',r.length,'الطول')}</td>${Array.from({length:count},(_,i)=>`<td>${numInput('width',r.widths?.[i],'العرض '+(i+1))}</td>`).join('')}<td class="avg">0.00</td>`;if(mode==='vol')h+=`<td>${numInput('depth',r.depth,'العمق','placeholder="0.15"')}</td>`;return h+`<td class="rq">0.00</td>`}
+function readRow(tr){return {length:tr.querySelector('.length')?.value??'',widths:[...tr.querySelectorAll('.width')].map(x=>x.value),depth:tr.querySelector('.depth')?.value??'',qty:tr.querySelector('.qty')?.value??'',desc:tr.querySelector('.desc')?.value??''}}
+function renderItemTable(item,rows){let mode=unitMode(item.querySelector('.unit').value),count=Number(item.dataset.widthCount||1);item.dataset.mode=mode;item.querySelector('.measure-head').innerHTML=itemHeadHtml(mode,count);let ncols=mode==='len'||mode==='qty'?2:(count+(mode==='vol'?4:3));item.querySelector('table').style.minWidth=Math.min(620,ncols*92)+'px';let tb=item.querySelector('tbody');tb.innerHTML='';(rows.length?rows:[{}]).forEach(r=>addMeasure(item,r,true));item.querySelector('.width-controls .add-width').classList.toggle('hidden',!usesWidths(mode));item.querySelector('.add-width').disabled=count>=4;item.querySelector('.unit-hint').textContent=UNIT_HINT[mode];updateSummary()}
+function onUnitChange(item){let rows=[...item.querySelectorAll('tbody tr')].map(readRow);renderItemTable(item,rows);markDirty()}
+function addItem(street=null,data={}){if(!street)street=$('streets').lastElementChild;if(!street){addStreet();return}itemCounter++;let id=itemCounter;let count=Math.max(1,Number(data.widthCount)||Math.max(1,(data.rows||[]).reduce((m,r)=>Math.max(m,(r.widths||[]).filter(v=>v!==''&&v!=null).length),1)));count=Math.min(4,count);const units=['م²','م.ط','م³','طن','عدد'];let unit=units.includes(data.unit)?data.unit:'م²';let el=document.createElement('div');el.className='item';el.dataset.id=id;el.dataset.widthCount=count;el.innerHTML=`<div class="itemhead"><strong>البند <span class="item-num">${id}</span></strong><button class="btn danger no-print" onclick="if(confirm('حذف البند ده؟')){this.closest('.item').remove();renumber();updateSummary();markDirty()}">حذف البند</button></div><div class="grid"><div class="field"><label>رقم البند من المقايسة (اختياري)</label><input class="item-number" placeholder="مثال: 1، أو 1+2 لو القياس ده لبندين" value="${esc(data.number||'')}"></div><div class="field"><label>اسم البند</label><input class="item-name" placeholder="مثال: قطع وتمهيد" value="${esc(data.name||'')}"></div><div class="field"><label>وحدة القياس</label><select class="unit">${units.map(u=>`<option ${u===unit?'selected':''}>${u}</option>`).join('')}</select><div class="small unit-hint"></div></div></div><div class="rowtable"><table><thead><tr class="measure-head"></tr></thead><tbody class="measure-rows"></tbody></table></div><div class="width-controls no-print"><button class="btn add add-width" onclick="addWidth(this.closest('.item'))">＋ إضافة عرض</button><button class="btn add" onclick="addMeasure(this.closest('.item'));markDirty()">＋ إضافة صف</button><button class="btn add" onclick="removeLastRow(this.closest('.item'))">− حذف آخر صف</button></div><div class="small">إجمالي البند: <b class="item-total">0.00</b> <span class="item-unit">${unit}</span></div>`;street.querySelector('.items').appendChild(el);el.querySelector('.unit').addEventListener('change',()=>onUnitChange(el));el.querySelectorAll('.item-number,.item-name').forEach(x=>x.addEventListener('input',updateSummary));renderItemTable(el,data.rows||[])}
+function addWidth(item){let count=Number(item.dataset.widthCount||1);if(count>=4){toast('الحد الأقصى أربعة عروض لكل بند');return}let rows=[...item.querySelectorAll('tbody tr')].map(readRow);item.dataset.widthCount=count+1;renderItemTable(item,rows);markDirty()}
+function addMeasure(item,data={},silent){let mode=item.dataset.mode||unitMode(item.querySelector('.unit').value),count=Number(item.dataset.widthCount||1);let tr=document.createElement('tr');tr.innerHTML=rowHtml(mode,count,data);item.querySelector('tbody').appendChild(tr);tr.querySelectorAll('input').forEach(x=>x.addEventListener('input',updateSummary));if(!silent)updateSummary()}
+function removeLastRow(item){let rows=item.querySelectorAll('tbody tr');if(rows.length<=1){toast('لازم يفضل صف واحد على الأقل');return}let last=rows[rows.length-1],r=readRow(last);if((r.length||r.qty||r.desc||r.widths.some(Boolean))&&!confirm('آخر صف فيه أرقام. تحذفه؟'))return;last.remove();updateSummary();markDirty()}
+function num(v){return Math.max(0,Number(v)||0)}
+function calcRow(mode,r){let len=num(r.length),ws=(r.widths||[]).map(num).filter(x=>x>0),avg=ws.length?ws.reduce((a,b)=>a+b,0)/ws.length:0;if(mode==='area')return {avg,result:len*avg};if(mode==='vol')return {avg,result:len*avg*num(r.depth)};if(mode==='len')return {avg:null,result:len};return {avg:null,result:num(r.qty)}}
+function updateSummary(){document.querySelectorAll('.item').forEach(it=>{let mode=it.dataset.mode||'area',total=0;it.querySelectorAll('tbody tr').forEach(tr=>{let c=calcRow(mode,readRow(tr));let a=tr.querySelector('.avg');if(a)a.textContent=(c.avg||0).toFixed(2);let q=tr.querySelector('.rq');if(q)q.textContent=c.result.toFixed(2);total+=c.result});it.dataset.total=total;it.querySelector('.item-total').textContent=total.toFixed(2);it.querySelector('.item-unit').textContent=it.querySelector('.unit').value});let rows=[];document.querySelectorAll('.street').forEach(st=>st.querySelectorAll('.item').forEach(it=>{rows.push({number:it.querySelector('.item-number').value.trim(),street:st.querySelector('.street-name').value||'—',name:it.querySelector('.item-name').value||'—',unit:it.querySelector('.unit').value,total:Number(it.dataset.total||0)})}));$('summary').innerHTML=`<div class="rowtable"><table class="summarytable"><thead><tr><th>رقم البند</th><th>اسم البند</th><th>الشارع</th><th>الكمية</th><th>وحدة القياس</th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${esc(r.number||'—')}</td><td>${esc(r.name)}</td><td>${esc(r.street)}</td><td>${r.total.toFixed(2)}</td><td>${esc(r.unit)}</td></tr>`).join('')}</tbody></table></div>`;if(!restoringDraft)claimAfterSurveyChange()}
+function renumber(){[...document.querySelectorAll('.street')].forEach((s,i)=>s.querySelector('.street-num').textContent=i+1);[...document.querySelectorAll('.item')].forEach((it,i)=>it.querySelector('.item-num').textContent=i+1)}function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function getData(){updateSummary();return {surveyNo:$('surveyNo').value.trim(),surveyType:$('surveyType').value,project:$('project').value,subProject:$('subProject').value,date:$('date').value,surveyor:$('surveyor').value,generalNotes:$('generalNotes').value,claim:claimExport(),streets:[...document.querySelectorAll('.street')].map(st=>({name:st.querySelector('.street-name').value,location:st.querySelector('.street-location').value,photos:[...st.querySelectorAll('.photo-grid img')].map(img=>img.getAttribute('src')),sketch:st.dataset.sketch||'',sketchName:st.dataset.sketchName||'',sketchType:st.dataset.sketchType||'',sketchUrl:st.dataset.sketchUrl||'',items:[...st.querySelectorAll('.item')].map(it=>{let mode=it.dataset.mode||'area';return {number:it.querySelector('.item-number').value,name:it.querySelector('.item-name').value,unit:it.querySelector('.unit').value,widthCount:Number(it.dataset.widthCount||1),total:Number(it.dataset.total||0),rows:[...it.querySelectorAll('tbody tr')].map(tr=>{let r=readRow(tr),c=calcRow(mode,r);return Object.assign(r,{avg:c.avg,result:c.result})})}})}))}}
+function loadData(d){restoringDraft=true;try{$('surveyNo').value=d.surveyNo||'';$('surveyType').value=d.surveyType||'حصر ابتدائي';$('project').value=d.project||'';$('subProject').value=d.subProject||'';$('date').value=d.date||'';$('surveyor').value=d.surveyor||'';$('generalNotes').value=d.generalNotes||'';claimImport(d.claim);$('streets').innerHTML='';streetCounter=0;itemCounter=0;(d.streets||[]).forEach(s=>addStreet(s));renumber();updateSummary()}finally{restoringDraft=false}renderClaim()}
+function saveLocal(){let blob=new Blob([JSON.stringify(getData(),null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=( $('surveyNo').value||'quantity-survey')+'.json';a.click();URL.revokeObjectURL(a.href);toast('تم تنزيل نسخة البيانات')}
+function importLocal(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);loadData(d);meta={serverNo:'',savedAt:'',dirty:true};markDirty();toast('تم استيراد البيانات. اضغط حفظ في السيستم لو عايز المكتب يشوفها')}catch{toast('تعذر قراءة الملف')}};r.readAsText(f);e.target.value=''}
+function exportCsv(){let rows=[['رقم الحصر',$('surveyNo').value],['المشروع الرئيسي',$('project').value],['المشروع الفرعي',$('subProject').value],['التاريخ',$('date').value],['المساح',$('surveyor').value],[],['رقم البند من المقايسة','اسم البند','الشارع','الوحدة','الطول','العروض','متوسط العرض','العمق','البيان','الكمية المباشرة','كمية الصف']];let d=getData();d.streets.forEach(st=>st.items.forEach(it=>it.rows.forEach(r=>{rows.push([it.number,it.name,st.name,it.unit,r.length,(r.widths||[]).filter(x=>x!=='').join(' / '),r.avg==null?'':r.avg.toFixed(2),r.depth,r.desc,r.qty,r.result.toFixed(2)])})));let csv='﻿'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=($('surveyNo').value||'quantity-survey')+'.csv';a.click();URL.revokeObjectURL(a.href)}
+let attachmentQueue=[];let attachmentIndex=0;
+function driveView(src){let m=/[?&]id=([^&]+)/.exec(src||'')||/\/d\/([^/]+)/.exec(src||'');return m?'https://drive.google.com/file/d/'+m[1]+'/view':src}
+function buildAttachmentQueue(){attachmentQueue=[];attachmentIndex=0;document.querySelectorAll('.street').forEach((st,i)=>{let name=st.querySelector('.street-name').value.trim()||('الشارع '+(i+1));[...st.querySelectorAll('.photo-grid img')].forEach((img,j)=>{let src=img.getAttribute('src');if(/^https?:/i.test(src))attachmentQueue.push({kind:'text',name:name+' - صورة '+(j+1),text:name+' - صورة '+(j+1)+'\n'+driveView(src)});else attachmentQueue.push({kind:'image',name:name+' - صورة '+(j+1),data:src,filename:`${name}-صورة-${j+1}.jpg`})});let loc=st.querySelector('.street-location').value.trim();if(loc)attachmentQueue.push({kind:'text',name:name+' - اللوكيشن',text:'لوكيشن '+name+'\n'+( /^https?:\/\//i.test(loc)?loc:('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(loc)) )});if(st.dataset.sketch){if(/^https?:/i.test(st.dataset.sketch))attachmentQueue.push({kind:'text',name:name+' - كروكي الشارع',text:'كروكي '+name+'\n'+(st.dataset.sketchUrl||driveView(st.dataset.sketch))});else attachmentQueue.push({kind:st.dataset.sketchType==='application/pdf'?'pdf':'image',name:name+' - كروكي الشارع',data:st.dataset.sketch,filename:st.dataset.sketchName||`${name}-كروكي`})}});let q=$('shareQueue');q.textContent=attachmentQueue.length?`تم تجهيز ${attachmentQueue.length} مرفقًا. اضغط زر إرسال المرفقات، وسيُفتح كل مرفق منفصلًا مع اسم الشارع. اختر واتساب في كل مرة وأرسل، ثم عُد إلى الصفحة واضغط الزر مرة أخرى.`:'لا توجد صور أو لوكيشن أو كروكي جاهز للمشاركة.'}
+async function shareNextAttachment(){if(!attachmentQueue.length)buildAttachmentQueue();if(!attachmentQueue.length){toast('أضف صورة أو لوكيشن أو كروكي أولًا');return}if(attachmentIndex>=attachmentQueue.length){toast('انتهت قائمة المرفقات');$('shareQueue').textContent='تمت محاولة مشاركة كل المرفقات. لإعادة الإرسال اضغط الزر مرة أخرى.';attachmentQueue=[];return}let a=attachmentQueue[attachmentIndex];try{if(a.kind==='text'){if(navigator.share)await navigator.share({title:a.name,text:a.text});else{await navigator.clipboard.writeText(a.text);toast('تم نسخ اللوكيشن؛ الصقه في واتساب')}}else{let blob=await (await fetch(a.data)).blob();let ext=a.kind==='pdf'?'pdf':(blob.type.includes('png')?'png':'jpg');let file=new File([blob],a.filename.includes('.')?a.filename:a.filename+'.'+ext,{type:a.kind==='pdf'?'application/pdf':blob.type||'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[file]}))await navigator.share({title:a.name,text:a.name,files:[file]});else{let url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=file.name;link.click();setTimeout(()=>URL.revokeObjectURL(url),4000);toast('تم تنزيل المرفق؛ أرفقه في واتساب يدويًا')}}attachmentIndex++;$('shareQueue').textContent=`تمت معالجة ${attachmentIndex} من ${attachmentQueue.length}. المرفق التالي: ${attachmentQueue[attachmentIndex]?.name||'انتهت القائمة'}. اضغط الزر مرة أخرى بعد الرجوع من واتساب.`}catch(e){if(e.name!=='AbortError')toast('لم تتم المشاركة. ارجع واضغط الزر للمحاولة مرة أخرى.')} }
+function buildPdfFilename(){let project=$('project').value.trim()||'بدون اسم مشروع';let sub=$('subProject').value.trim();let streets=[...document.querySelectorAll('.street')].map(st=>st.querySelector('.street-name').value.trim()).filter(Boolean);let streetLabel=sub||streets.join(' و ')||'بدون اسم شارع';if(streetLabel.length>70)streetLabel=streetLabel.slice(0,70);let no=$('surveyNo').value.trim();let raw=`حصر ش ${streetLabel} مشروع ${project}${no?' - '+no:''}`;return raw.replace(/[\\/:*?"<>|]/g,'-').replace(/\s+/g,' ').trim()}
+function reportEscape(s){return esc(String(s??'').trim()||'—')}
+
+
+
+// ===== واتساب: الرقمين اللي بيستلموا كل حاجة =====
+// [الرقم زي ما بيتكتب, الرقم بكود الدولة]. ممكن تزود أو تشيل أرقام من هنا.
+const WA_PHONES = [['01003833499', '201003833499'], ['01226368072', '201226368072']];
+function dkWaUrl(text, phone) { const p = String(phone || '').replace(/\D/g, ''); return 'https://wa.me/' + p + '?text=' + encodeURIComponent(text); }
+function dkNowAr() { return new Date().toLocaleString('ar-EG', { dateStyle: 'short', timeStyle: 'short' }); }
+function dkBlobBase64(blob) { return new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(String(fr.result).split(',')[1]); fr.onerror = rej; fr.readAsDataURL(blob); }); }
+// بيرفع الـ PDF على الدرايف (فولدر «ملفات PDF») ويرجّع لينك يتبعت في رسالة الواتساب
+async function dkSavePdf(file, kind, ref) {
+  if (!API_URL || !file) return '';
+  try { const r = await dkCall('pdf.save', { kind, ref, name: file.name, file: { name: file.name, mime: 'application/pdf', base64: await dkBlobBase64(file) } }); return r.url || ''; }
+  catch (e) { console.warn('pdf upload', e); return ''; }
+}
+function dkSheetCss() {
+  if (document.getElementById('dkSheetCss')) return;
+  const s = document.createElement('style'); s.id = 'dkSheetCss';
+  s.textContent = '.dk-wa{background:#168447}.dk-wa-preview{white-space:pre-wrap;background:#f6f8f7;border:1px solid #e3e8e5;border-radius:10px;padding:10px;font-size:12px;max-height:22vh;overflow:auto;font-family:inherit;direction:rtl;text-align:right;margin:8px 0 4px}'
+    + '.dk-sep{font-size:12px;font-weight:700;color:#4b5a52;margin:14px 0 2px;border-top:1px solid #e6ebe8;padding-top:10px}.dk-pstat{display:flex;gap:8px;align-items:center;font-size:13px;background:#f3f6f4;border-radius:10px;padding:10px;margin-top:8px;line-height:1.6}'
+    + '.dk-ok{font-size:12px;color:#1b5e20;margin:6px 0 0}.dk-btn.blue{background:#12366f}.dk-btn.done{opacity:.75}';
+  document.head.appendChild(s);
+}
+// شاشة الإرسال بعد أي حفظ:
+// o = {title, hint, text, file, makePdf: async () => ({file, kind, ref}), auto: true/false, onPrint}
+// auto: الـ PDF بيتعمل لوحده أول ما الشاشة تفتح. من غيرها بيظهر زرار «طلّع PDF».
+function dkSendSheet(o) {
+  o = o || {}; dkSheetCss();
+  const st = { file: o.file || null, url: '', pdf: o.file ? 'ready' : o.makePdf ? (o.auto ? 'making' : 'idle') : 'none', err: '', done: {} };
+  const ov = document.createElement('div'); ov.className = 'dk-overlay';
+  document.body.appendChild(ov);
+  const msg = () => (o.text || '') + (st.url ? '\n\n📎 ملف الـ PDF: ' + st.url : '');
+  const canShare = f => !!(f && navigator.canShare && navigator.canShare({ files: [f] }));
+  const btn = (key, cls, label) => `<button type="button" class="dk-btn ${cls}${st.done[key] ? ' done' : ''}" data-k="${key}">${label}${st.done[key] ? ' ✓' : ''}</button>`;
+  function draw() {
+    let pdf = '';
+    const fileBtns = () => btn('dl', 'blue', '⬇️ تحميل الـ PDF') + (canShare(st.file) ? btn('share', 'dk-wa', '📎 ابعت ملف الـ PDF نفسه (اختار الشات)') : '');
+    if (st.pdf === 'making') pdf = '<div class="dk-pstat"><span class="dk-spin"></span><span>جارٍ تجهيز الـ PDF بالبيانات اللي اتكتبت…</span></div>';
+    else if (st.pdf === 'uploading') pdf = fileBtns() + '<div class="dk-pstat"><span class="dk-spin"></span><span>جارٍ رفع الـ PDF على الدرايف عشان لينكه يتبعت مع الرسالة…</span></div>';
+    else if (st.pdf === 'ready') pdf = fileBtns() + (st.url ? '<p class="dk-ok">☁️ الـ PDF اتحفظ على الدرايف ولينكه هيتبعت مع الرسالة.</p>' : '');
+    else if (st.pdf === 'idle') pdf = btn('make', 'blue', '📄 طلّع PDF');
+    else if (st.pdf === 'error') pdf = `<p class="dk-err">${dkEsc(st.err)}</p>` + btn('make', 'light', '🔁 جرب تاني') + (o.onPrint ? btn('print', 'light', '🖨️ افتح نسخة الطباعة واحفظها PDF') : '');
+    const busy = st.pdf === 'making' || st.pdf === 'uploading';
+    ov.innerHTML = `<div class="dk-sheet"><h3>${dkEsc(o.title || '✓ اتحفظ في السيستم')}</h3>${o.hint ? `<p class="dk-muted">${dkEsc(o.hint)}</p>` : ''}${pdf}
+      <div class="dk-sep">ابعت على واتساب</div>
+      ${WA_PHONES.map((p, i) => btn('n' + i, 'dk-wa', `💬 ابعت لـ <span dir="ltr">${p[0]}</span>`)).join('')}
+      ${btn('other', 'light', '💬 ابعت لشات أو جروب تاني')}
+      ${busy ? '<p class="dk-muted" style="margin-top:6px">لو استنيت ثواني لحد ما الـ PDF يجهز، لينكه هيتبعت مع الرسالة.</p>' : ''}
+      <pre class="dk-wa-preview"></pre>
+      <button type="button" class="dk-btn light dk-wa-skip dk-close">تمام</button></div>`;
+    ov.querySelector('pre').textContent = msg();
+    ov.querySelectorAll('[data-k]').forEach(b => b.onclick = () => act(b.dataset.k));
+    ov.querySelector('.dk-close').onclick = () => ov.remove();
+  }
+  function mark(k) { st.done[k] = 1; draw(); }
+  function act(k) {
+    if (k === 'dl') { dkDownload(st.file); mark(k); }
+    else if (k === 'share') navigator.share({ files: [st.file], title: st.file.name, text: o.text ? o.text.split('\n')[0].replace(/\*/g, '') : st.file.name }).then(() => mark(k)).catch(() => { });
+    else if (k === 'make') make();
+    else if (k === 'print') { ov.remove(); o.onPrint(); }
+    else if (k === 'other') { window.open(dkWaUrl(msg(), ''), '_blank'); mark(k); }
+    else if (k[0] === 'n') { window.open(dkWaUrl(msg(), WA_PHONES[+k.slice(1)][1]), '_blank'); mark(k); }
+  }
+  async function make() {
+    st.pdf = 'making'; draw();
+    try {
+      const r = await o.makePdf();
+      if (!r || !r.file || r.file.size < 1000) throw new Error('empty');
+      st.file = r.file; st.pdf = API_URL && r.kind ? 'uploading' : 'ready'; draw();
+      if (st.pdf === 'uploading') { st.url = await dkSavePdf(r.file, r.kind, r.ref); st.pdf = 'ready'; if (document.body.contains(ov)) draw(); }
+    } catch (e) {
+      console.error(e); st.pdf = 'error';
+      st.err = e && e.code === 'NO_LIB' ? e.message : 'الـ PDF المباشر مش شغال على الجهاز ده.';
+      if (document.body.contains(ov)) draw();
+    }
+  }
+  ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+  draw();
+  if (st.pdf === 'making') make();
+  return ov;
+}
+function dkWhatsSheet(text, opts) { return dkSendSheet(Object.assign({ text }, opts || {})); }
+
+
+// ===== تحويل التقارير لـ PDF بخط عربي ثابت (الكلام مبيلزقش في بعضه وبيطلع نفس الشكل على أي موبايل) =====
+// بيرسم الصفحة كصورة عالية الجودة جوه PDF، وبيقطع الصفحات بين الصفوف مش في نصها.
+// ممكن نجمع أكتر من جزء في ملف واحد (مثلا الحصر طولي + المستخلص عرضي).
+const DK_FONT_RANGES = { arabic: 'U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC', latin: 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD' };
+const DK_FONTS = {
+  sans: { family: 'DKSans', base: 'https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-arabic@5.3.0/files/noto-sans-arabic-', fallback: 'Tahoma, Arial, sans-serif' }
+};
+const dkFontCache = {};
+// بيرجع {css, family}: الـ css فيه الخط نفسه عشان يتحط جوه التقرير. لو النت فصل بنستخدم خط الجهاز.
+async function dkLoadFont(key) {
+  if (dkFontCache[key]) return dkFontCache[key];
+  const f = DK_FONTS[key];
+  try {
+    const faces = await Promise.all([['arabic', 400], ['arabic', 700], ['latin', 400], ['latin', 700]].map(async ([sub, w]) => {
+      const r = await fetch(f.base + sub + '-' + w + '-normal.woff2'); if (!r.ok) throw new Error('font');
+      const blob = await r.blob();
+      const data = await new Promise(res => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.readAsDataURL(blob); });
+      try { const ff = new FontFace(f.family, 'url(' + data + ')', { weight: String(w), unicodeRange: DK_FONT_RANGES[sub] }); await ff.load(); document.fonts.add(ff); } catch (e) { }
+      return "@font-face{font-family:'" + f.family + "';font-weight:" + w + ';src:url(' + data + ") format('woff2');unicode-range:" + DK_FONT_RANGES[sub] + '}';
+    }));
+    dkFontCache[key] = { css: faces.join(''), family: "'" + f.family + "', " + f.fallback };
+  } catch (e) { console.warn('font fallback', e); dkFontCache[key] = { css: '', family: f.fallback }; }
+  return dkFontCache[key];
+}
+
+// parts: [{el, orientation:'portrait'|'landscape', margin, breakAt, fitMin, numbered}]
+// .keep = متتقسمش على صفحتين، .pb = يبدأ في صفحة جديدة
+async function dkPdfParts(parts) {
+  const J = window.jspdf && window.jspdf.jsPDF;
+  if (!J) throw dkErr('NO_LIB', 'مكتبة PDF مش محمّلة. اتأكد من النت.');
+  const doc = { pdf: null, numbered: [] };
+  doc.page = (orientation, numbered) => {
+    if (!doc.pdf) doc.pdf = new J({ orientation, unit: 'mm', format: 'a4', compress: true });
+    else doc.pdf.addPage('a4', orientation);
+    if (numbered) doc.numbered.push({ i: doc.pdf.getNumberOfPages(), label: typeof numbered === 'string' ? numbered : '' });
+    return doc.pdf;
+  };
+  for (const part of parts) await dkRenderPart(part, doc);
+  const pdf = doc.pdf, total = pdf.getNumberOfPages();
+  doc.numbered.forEach(n => {
+    pdf.setPage(n.i); pdf.setFontSize(8); pdf.setTextColor(130);
+    const w = pdf.internal.pageSize.getWidth(), h = pdf.internal.pageSize.getHeight();
+    pdf.text(n.i + ' / ' + total, w - 10, h - 6, { align: 'right' });
+    if (n.label) pdf.text(n.label, 10, h - 6);
+  });
+  return pdf.output('blob');
+}
+async function dkHtmlToPdf(el, opts) { return dkPdfParts([Object.assign({ el }, opts || {})]); }
+
+async function dkRenderPart(part, doc) {
+  const el = part.el, orient = part.orientation === 'landscape' ? 'landscape' : 'portrait';
+  const margin = part.margin || 8;
+  const pageWmm = orient === 'landscape' ? 297 : 210, pageHmm = orient === 'landscape' ? 210 : 297;
+  const contentWmm = pageWmm - margin * 2, contentHmm = pageHmm - margin * 2 - (part.numbered ? 3 : 0);
+  const W = Math.round(contentWmm * 3.78);   // عرض المحتوى بالبكسل (96dpi)
+  const host = document.createElement('div');
+  host.style.cssText = 'position:fixed;left:-20000px;top:0;width:' + W + 'px;background:#fff;z-index:-1';
+  host.appendChild(el); document.body.appendChild(host);
+  try {
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    await new Promise(r => setTimeout(r, 60));
+    const H = Math.ceil(el.scrollHeight) + 4;   // +4: آخر خط في الجدول بيطلع بره حدود العنصر بنص بكسل
+    const top0 = el.getBoundingClientRect().top;
+    const tops = sel => [...el.querySelectorAll(sel)].map(n => n.getBoundingClientRect().top - top0);
+    // مننقطعش الصفحة بعد عنوان على طول، ولا بين رأس الجدول وأول صف فيه
+    const noCut = tops('h1 + *, h2 + *, h3 + *, thead + tbody > tr:first-child, .hs-item + *');
+    const cuts = tops(part.breakAt || 'tr,section,header,h1,h2,.keep').filter(y => y > 0 && !noCut.some(n => Math.abs(n - y) < 3)).sort((a, b) => a - b);
+    const forced = tops('.pb').filter(y => y > 2).sort((a, b) => a - b);
+    const avoid = [...el.querySelectorAll('.keep')].map(n => { const r = n.getBoundingClientRect(); return [r.top - top0, r.bottom - top0]; });
+    const xhtml = new XMLSerializer().serializeToString(el);
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '"><foreignObject x="0" y="0" width="' + W + '" height="' + H + '">' + xhtml + '</foreignObject></svg>';
+    const img = new Image();
+    await new Promise((res, rej) => { img.onload = res; img.onerror = () => rej(dkErr('RENDER', 'تعذر تجهيز الصفحة')); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); });
+    if (img.decode) { try { await img.decode(); } catch (e) { } }
+    const pxPerMm = W / contentWmm, pageHpx = contentHmm * pxPerMm;
+    const scale = part.scale || 2.4;
+    // بيرسم جزء من الصورة على canvas ويرجّعه JPEG (في بعض أجهزة الآيفون بيرمي خطأ هنا، وساعتها بنحوّل للطباعة)
+    const jpeg = (y, h) => {
+      const cv = document.createElement('canvas');
+      cv.width = Math.round(W * scale); cv.height = Math.round(h * scale);
+      const ctx = cv.getContext('2d');
+      ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.drawImage(img, 0, y, W, h, 0, 0, cv.width, cv.height);
+      return cv.toDataURL('image/jpeg', 0.92);
+    };
+    // لو المحتوى أطول من صفحة بشوية، بنصغّره عشان ييجي في صفحة واحدة (زي المستخلص الورقي)
+    if (part.fitMin && H > pageHpx && pageHpx / H >= part.fitMin) {
+      const wmm = contentWmm * pageHpx / H, data = jpeg(0, H);
+      doc.page(orient, part.numbered ? (/^[\x20-\x7E]*$/.test(part.footer || '') && part.footer ? part.footer : true) : false).addImage(data, 'JPEG', margin + (contentWmm - wmm) / 2, margin, wmm, contentHmm, undefined, 'FAST');
+      return;
+    }
+    let y = 0;
+    while (y < H - 2) {
+      let end = Math.min(H, y + pageHpx);
+      const fb = forced.find(t => t > y + 2 && t < end);
+      if (fb) end = fb;
+      else if (end < H) {
+        const inside = avoid.find(a => a[0] < end && a[1] > end && a[0] > y + 20);
+        const c = cuts.filter(t => t > y + 40 && t <= end);
+        if (inside) end = inside[0]; else if (c.length) end = c[c.length - 1];
+      }
+      const h = end - y, data = jpeg(y, h);
+      doc.page(orient, part.numbered ? (/^[\x20-\x7E]*$/.test(part.footer || '') && part.footer ? part.footer : true) : false).addImage(data, 'JPEG', margin, margin, contentWmm, h / pxPerMm, undefined, 'FAST');
+      y = end;
+    }
+  } finally { host.remove(); }
+}
+
+// مشاركة ملف: لو المتصفح طلب ضغطة جديدة (زي الآيفون) بنظهر زرار مشاركة، ولو المشاركة مش مدعومة بننزّل الملف
+function dkDownload(file) { const url = URL.createObjectURL(file), a = document.createElement('a'); a.href = url; a.download = file.name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 8000); }
+async function dkShareFile(file, text, title) {
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try { await navigator.share({ files: [file], title, text }); return 'shared'; }
+    catch (e) {
+      if (e.name === 'AbortError') return 'aborted'; if (e.name !== 'NotAllowedError') throw e;
+      return new Promise(res => {
+        const ov = document.createElement('div'); ov.className = 'dk-overlay';
+        ov.innerHTML = '<div class="dk-sheet"><h3>✓ الملف جاهز</h3><p class="dk-muted">' + dkEsc(file.name) + '</p><button type="button" class="dk-btn dk-wa">📤 مشاركة على واتساب</button><button type="button" class="dk-btn light">إلغاء</button></div>';
+        document.body.appendChild(ov);
+        ov.querySelector('.dk-wa').onclick = () => { ov.remove(); navigator.share({ files: [file], title, text }).then(() => res('shared')).catch(() => res('aborted')); };
+        ov.querySelector('.light').onclick = () => { ov.remove(); res('aborted'); };
+      });
+    }
+  }
+  dkDownload(file); return 'downloaded';
+}
+function pdfFallback(printFn) {
+  const ov = document.createElement('div'); ov.className = 'dk-overlay';
+  ov.innerHTML = '<div class="dk-sheet"><h3>الـ PDF المباشر مش شغال على الجهاز ده</h3><p class="dk-muted">افتح نسخة الطباعة واختار «حفظ كـ PDF». النتيجة نفس الشكل.</p><button type="button" class="dk-btn">🖨️ افتح نسخة الطباعة</button><button type="button" class="dk-btn light">إلغاء</button></div>';
+  document.body.appendChild(ov);
+  ov.querySelector('.dk-btn').onclick = () => { ov.remove(); printFn(); };
+  ov.querySelector('.light').onclick = () => ov.remove();
+}
+// اسم ملف آمن
+function dkFileName(s) { return String(s || 'ملف').replace(/[\\/:*?"<>|#%]/g, '-').replace(/\s+/g, ' ').trim().slice(0, 90); }
+// ================= المستخلص (بيتعمل من الحصر) =================
+const CLAIM_DEFAULT={type:'جاري',no:'1',from:'',to:'',authority1:'محافظة الإسكندرية',authority2:'مديرية الطرق والنقل',authority3:'إدارة المشروعات - مركز المعلومات',operation:'',contractor:'منشأة الضمراني لاستصلاح الأراضي والتجارة والمقاولات (محمد ضمراني محمد ضمراني)',topNote:'يتم تنفيذ جميع الأعمال فنيا طبقا للكود المصري للطرق الحضرية والخلوية طبعة ٢٠٢١ الطبعة الأولى التحديث الثاني',approveNote:'يعتمد بعد المراجعة الفنية للمركز الهندسي بالأكاديمية العربية للعلوم والتكنولوجيا حسب التعاقد معهم',approver:'مدير مديرية الطرق والنقل',remarks:'المهندس متواجد والمراقب متواجد\nالمياه والكهرباء بمعرفة المقاول\nتم تقديم تقرير بالصور وبمراحل الأعمال أسبوعياً\nتم توفير الأجهزة والوسائط والأدوات اللازمة لنقل البيانات والمعلومات\nوسائل المتابعة واللوجيستيات متواجدة قواعد الأمن والسلامة متواجدة\nتم الالتزام بكافة الإجراءات الاحترازية اللازمة\nقواعد الأمن والسلامة متواجدة\nوسائل المتابعة واللوجيستيات متواجدة',items:[]};
+const CLAIM_HEAD_FIELDS=[['authority1','الجهة (السطر الأول)'],['authority2','الجهة (السطر التاني)'],['authority3','الإدارة (السطر التالت)'],['operation','العملية','مثال: رصف الطرق والأرصفة بنطاق حي منتزه ثان (١) الخطة الاستثمارية للعام المالي ٢٠٢٣/٢٠٢٤'],['contractor','المقاول'],['topNote','ملاحظة أعلى الجدول'],['approveNote','سطر الاعتماد تحت التوقيعات'],['approver','المعتمِد']];
+let claim=JSON.parse(JSON.stringify(CLAIM_DEFAULT));
+const AR_DIG='٠١٢٣٤٥٦٧٨٩';
+function toAr(s){return String(s??'').replace(/\d/g,d=>AR_DIG[d])}
+function r2(n){return Math.round((Number(n)||0)*100)/100}
+function arNum(n){if(n===''||n==null||isNaN(Number(n)))return '';return toAr(String(r2(n)))}
+function arMoney(n){return Number(r2(n)).toLocaleString('ar-EG',{maximumFractionDigits:2})}
+function arDate(v){return v?toAr(String(v).replace(/-/g,'/')):'........'}
+function claimKey(no,name){no=String(no||'').trim();name=String(name||'').trim();return no||(name?'اسم:'+name:'')}
+function natCmp(a,b){const x=String(a.no||''),y=String(b.no||'');if(!x&&y)return 1;if(x&&!y)return -1;return x.localeCompare(y,'ar',{numeric:true})}
+function syncClaimItems(sums){let changed=false;
+ claim.items=claim.items.filter(ci=>{if(ci.auto&&!sums[ci.key]){changed=true;return false}return true});
+ Object.keys(sums).forEach(k=>{const s=sums[k];let ci=claim.items.find(x=>x.key===k);if(!ci){claim.items.push({key:k,no:s.no||'',desc:s.name||'',unit:s.unit,price:'',contract:'',added:'',prev:'',status:'جاري',ded:'',held:false,notes:'',auto:true});changed=true}else if(ci.auto&&(ci.desc!==s.name||ci.unit!==s.unit||ci.no!==(s.no||''))){ci.desc=s.name;ci.unit=s.unit;ci.no=s.no||'';changed=true}});
+ if(changed)claim.items.sort(natCmp);return changed}
+function claimCalc(ci,sums){const cur=r2((sums[ci.key]||{}).qty||0),prev=r2(num(ci.prev)),fin=r2(prev+cur),price=num(ci.price),value=r2(fin*price),ded=r2(num(ci.ded)),net=ci.held?0:r2(value-ded);return {cur,prev,fin,value,ded,net}}
+function claimTotals(sums){return claim.items.reduce((t,ci)=>{const c=claimCalc(ci,sums);t.value+=c.value;t.ded+=c.ded;t.net+=c.net;if(ci.held)t.held+=c.value-c.ded;return t},{value:0,ded:0,net:0,held:0})}
+function claimExport(){const sums=surveySums();syncClaimItems(sums);const items=claim.items.map(ci=>Object.assign({},ci,claimCalc(ci,sums)));const t=claimTotals(sums);return Object.assign({},claim,{items,totals:{value:r2(t.value),ded:r2(t.ded),net:r2(t.net),held:r2(t.held)}})}
+function claimImport(c){claim=Object.assign(JSON.parse(JSON.stringify(CLAIM_DEFAULT)),c||{});claim.items=(claim.items||[]).map(ci=>({key:ci.key||claimKey(ci.no,ci.desc),no:ci.no||'',desc:ci.desc||'',unit:ci.unit||'م²',price:ci.price??'',contract:ci.contract??'',added:ci.added??'',prev:ci.prev??'',status:ci.status||'جاري',ded:ci.ded??'',held:!!ci.held,notes:ci.notes||'',auto:!!ci.auto}))}
+// تجهيز المستخلص اللي بعده: السابق = النهائي، والرقم يزيد واحد
+function rollClaim(c,sums){const out=Object.assign({},c,{items:[]});const n=parseInt(c.no,10);out.no=isNaN(n)?'':String(n+1);out.from=c.to||'';out.to='';out.type='جاري';
+ out.items=(c.items||[]).filter(ci=>!ci.auto||Number(ci.fin||0)>0||ci.price).map(ci=>{const fin=ci.fin!=null?Number(ci.fin):claimCalc(ci,sums||{}).fin;return {key:ci.key,no:ci.no,desc:ci.desc,unit:ci.unit,price:ci.price,contract:ci.contract,added:ci.added,prev:r2(fin),status:ci.status||'جاري',ded:ci.ded,held:!!ci.held,notes:ci.notes,auto:false}});return out}
+
+function claimItemHtml(ci,i){const units=['م²','م.ط','م³','طن','عدد','بالعدد'];if(!units.includes(ci.unit))units.push(ci.unit);
+ return `<div class="ci" data-i="${i}"><div class="ci-head"><b>بند ${esc(ci.no||'بدون رقم')}</b>${ci.auto?'<span class="ci-auto">من الحصر</span>':''}<label class="ci-held"><input type="checkbox" data-f="held" ${ci.held?'checked':''}> معلّى</label><button type="button" class="btn danger ci-del" onclick="claimDelItem(${i})">حذف</button></div>
+ <div class="grid ci-grid3"><div class="field"><label>رقم البند</label><input data-f="no" value="${esc(ci.no)}"></div><div class="field"><label>الوحدة</label><select data-f="unit">${units.map(u=>`<option ${u===ci.unit?'selected':''}>${esc(u)}</option>`).join('')}</select></div><div class="field"><label>الفئة (ج.م)</label><input data-f="price" type="number" inputmode="decimal" min="0" step="0.01" value="${esc(ci.price)}"></div></div>
+ <div class="field"><label>نوع العمل (زي المقايسة)</label><textarea data-f="desc" rows="2">${esc(ci.desc)}</textarea></div>
+ <div class="grid ci-grid3"><div class="field"><label>المنظور</label><input data-f="contract" type="number" inputmode="decimal" min="0" step="0.01" value="${esc(ci.contract)}"></div><div class="field"><label>الأعمال المضافة</label><input data-f="added" type="number" inputmode="decimal" min="0" step="0.01" value="${esc(ci.added)}"></div><div class="field"><label>السابق إجازتها</label><input data-f="prev" type="number" inputmode="decimal" min="0" step="0.01" value="${esc(ci.prev)}"></div></div>
+ <div class="ci-calc">هذه المدة (من الحصر): <b class="ci-cur">0</b> · النهائي إلى اليوم: <b class="ci-fin">0</b> · القيمة: <b class="ci-val">0</b> · الصافي: <b class="ci-net">0</b></div>
+ <div class="grid ci-grid3"><div class="field"><label>الحالة</label><select data-f="status"><option ${ci.status==='جاري'?'selected':''}>جاري</option><option ${ci.status==='منتهي'?'selected':''}>منتهي</option></select></div><div class="field"><label>التنزيل أو الخصم (ج.م)</label><input data-f="ded" type="number" inputmode="decimal" min="0" step="0.01" value="${esc(ci.ded)}"></div><div class="field"><label>ملاحظات</label><input data-f="notes" value="${esc(ci.notes)}" placeholder="${ci.held?'سبب التعلية':'اختياري'}"></div></div></div>`}
+function renderClaim(){const box=$('claimItems');if(!box)return;const sums=surveySums();syncClaimItems(sums);
+ document.querySelectorAll('#claimHead [data-h]').forEach(el=>{const f=el.dataset.h;if(document.activeElement!==el)el.value=claim[f]??''});
+ box.innerHTML=claim.items.length?claim.items.map(claimItemHtml).join(''):'<p class="small">البنود بتظهر هنا تلقائي من بنود الحصر (بنجمّع نفس رقم البند من كل الشوارع). تقدر كمان تضيف بند يدوي، أو تجيب البيانات من مستخلص سابق.</p>';
+ updateClaimDerived(sums)}
+function updateClaimDerived(sums){sums=sums||surveySums();document.querySelectorAll('#claimItems .ci').forEach(el=>{const ci=claim.items[Number(el.dataset.i)];if(!ci)return;const c=claimCalc(ci,sums);el.querySelector('.ci-cur').textContent=c.cur.toFixed(2)+' '+ci.unit;el.querySelector('.ci-fin').textContent=c.fin.toFixed(2);el.querySelector('.ci-val').textContent=arMoney(c.value);el.querySelector('.ci-net').textContent=ci.held?'معلّى':arMoney(c.net);el.classList.toggle('held',!!ci.held);el.classList.toggle('noprice',!num(ci.price))});
+ const t=claimTotals(sums),miss=claim.items.filter(ci=>!num(ci.price)).length;
+ const tb=$('claimTotals');if(tb)tb.innerHTML=`قيمة الأعمال الإجمالية: <b>${arMoney(t.value)} ج.م</b> · الخصم: <b>${arMoney(t.ded)}</b> · الصافي بعد الخصم: <b>${arMoney(t.net)} ج.م</b>${t.held?` · معلّى: <b>${arMoney(t.held)}</b>`:''}<br><span class="small">${tafqeet(t.value)}</span>${miss?`<br><span class="ci-warn">⚠️ ${miss} ${miss===1?'بند مفيهوش':'بنود مفيهاش'} فئة (سعر)</span>`:''}`}
+function claimAfterSurveyChange(){if(!$('claimItems'))return;const sums=surveySums();if(syncClaimItems(sums))renderClaim();else updateClaimDerived(sums)}
+function claimDelItem(i){const ci=claim.items[i];if(!ci)return;if(!confirm('حذف بند '+(ci.no||ci.desc||'')+' من المستخلص؟'+(ci.auto?'\nالبند ده جاي من الحصر وهيرجع لو البند لسه موجود في الحصر.':'')))return;claim.items.splice(i,1);renderClaim();markDirty()}
+function claimAddItem(){claim.items.push({key:'يدوي:'+Date.now(),no:'',desc:'',unit:'م²',price:'',contract:'',added:'',prev:'',status:'جاري',ded:'',held:false,notes:'',auto:false});renderClaim();markDirty();const last=document.querySelector('#claimItems .ci:last-child input[data-f=no]');if(last){last.scrollIntoView({behavior:'smooth',block:'center'});last.focus()}}
+document.addEventListener('input',onClaimInput);document.addEventListener('change',onClaimInput);
+function onClaimInput(e){const el=e.target;if(el.dataset.h&&el.closest('#claimHead')){claim[el.dataset.h]=el.value;if(el.dataset.h==='no')$('claimNoBadge')&&($('claimNoBadge').textContent=el.value);return}
+ const box=el.closest('#claimItems .ci');if(!box||!el.dataset.f)return;const ci=claim.items[Number(box.dataset.i)];if(!ci)return;const f=el.dataset.f;ci[f]=el.type==='checkbox'?el.checked:el.value;
+ if(ci.auto){ci.auto=false;const b=box.querySelector('.ci-auto');if(b)b.remove()}
+ if(f==='no'){box.querySelector('.ci-head b').textContent='بند '+(ci.no||'بدون رقم');if(e.type==='change'&&String(ci.key).startsWith('يدوي:')&&ci.no.trim()){const k=ci.no.trim(),other=claim.items.find(x=>x!==ci&&x.key===k);if(!other||other.auto){if(other)claim.items.splice(claim.items.indexOf(other),1);ci.key=k;claim.items.sort(natCmp);renderClaim();return}}}
+ if(f==='held'){const n=box.querySelector('[data-f=notes]');if(n)n.placeholder=ci.held?'سبب التعلية':'اختياري'}
+ updateClaimDerived()}
+
+// يجيب الأسعار والكميات من مستخلص محفوظ قبل كده ويخلّي "السابق" = النهائي بتاعه
+async function claimFromPrevious(){
+ if(!API_URL){toast('الحفظ في السيستم لسه مش متفعل');return}
+ await dkEnsurePin({title:'رمز الموقع'});
+ pickSurvey('اختار المستخلص اللي قبله',async no=>{
+  try{dkBusy(true,'جارٍ تحميل المستخلص…');const r=await dkCall('survey.get',{surveyNo:no});const pc=r.survey.claim;dkBusy(false);
+   if(!pc||!(pc.items||[]).length){toast('الحصر ده مفيهوش بيانات مستخلص');return}
+   const hasData=claim.items.some(ci=>num(ci.price)||num(ci.prev));
+   if(hasData&&!confirm('هتستبدل بيانات المستخلص الحالية ببيانات مستخلص '+(pc.no||'')+' (والسابق هيبقى النهائي بتاعه). تكمل؟'))return;
+   claimImport(rollClaim(pc));renderClaim();markDirty();toast('تمام. ده مستخلص رقم '+(claim.no||'')+' والسابق اتحسب من المستخلص اللي قبله')}
+  catch(e){dkBusy(false);toast(e.message)}})}
+
+function pickSurvey(title,onPick){
+ dkBusy(true,'جارٍ تحميل الحصورات…');
+ dkCall('survey.list',{}).then(res=>{dkBusy(false);const list=res.list;let ov=document.createElement('div');ov.className='dk-overlay';
+  ov.innerHTML=`<div class="dk-sheet"><h3>${esc(title)}</h3><input id="svSearch" placeholder="ابحث برقم الحصر أو المشروع أو المساح"><div id="svList" style="margin-top:10px"></div><button type="button" class="dk-btn light" id="svClose">إغلاق</button></div>`;
+  document.body.appendChild(ov);
+  const draw=q=>{q=(q||'').trim();let rows=list.filter(x=>!q||[x.surveyNo,x.project,x.subProject,x.surveyor,x.claimNo].join(' ').includes(q));ov.querySelector('#svList').innerHTML=rows.length?rows.map(x=>`<button type="button" class="sv-row" data-no="${dkEsc(x.surveyNo)}"><b>${dkEsc(x.surveyNo)}</b> · ${dkEsc(x.type||'')}${x.claimNo?' · مستخلص '+dkEsc(x.claimNo):''}<br><span>${dkEsc(x.project||'')}${x.subProject?' / '+dkEsc(x.subProject):''} · ${dkEsc(x.date||'')} · ${dkEsc(x.surveyor||'')}</span></button>`).join(''):'<p class="dk-muted">مفيش حصورات بالبحث ده.</p>'};
+  draw('');ov.querySelector('#svSearch').oninput=e=>draw(e.target.value);ov.querySelector('#svClose').onclick=()=>ov.remove();
+  ov.querySelector('#svList').onclick=e=>{let b=e.target.closest('.sv-row');if(!b)return;ov.remove();onPick(b.dataset.no)}}).catch(e=>{dkBusy(false);toast(e.message)})}
+
+// ===== التفقيط (المبلغ بالحروف) =====
+function tafqeet(n){n=r2(n);const pounds=Math.floor(n),pi=Math.round((n-pounds)*100);
+ const ones=['','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة','أحد عشر','اثنا عشر','ثلاثة عشر','أربعة عشر','خمسة عشر','ستة عشر','سبعة عشر','ثمانية عشر','تسعة عشر'];
+ const tens=['','','عشرون','ثلاثون','أربعون','خمسون','ستون','سبعون','ثمانون','تسعون'];
+ const hund=['','مائة','مائتان','ثلاثمائة','أربعمائة','خمسمائة','ستمائة','سبعمائة','ثمانمائة','تسعمائة'];
+ const b1000=x=>{const h=Math.floor(x/100),r=x%100,p=[];if(h)p.push(hund[h]);if(r){if(r<20)p.push(ones[r]);else{const o=r%10,t=Math.floor(r/10);p.push(o?ones[o]+' و'+tens[t]:tens[t])}}return p.join(' و')};
+ const sc=(x,one,two,pl,acc)=>x===1?one:x===2?two:(x<=10?b1000(x)+' '+pl:b1000(x)+' '+acc);
+ const groups=[[1e9,'مليار','ملياران','مليارات','مليار'],[1e6,'مليون','مليونان','ملايين','مليون'],[1e3,'ألف','ألفان','آلاف','ألف']];
+ let rest=pounds;const parts=[];for(const [v,one,two,pl,acc] of groups){const q=Math.floor(rest/v);rest%=v;if(q)parts.push(sc(q,one,two,pl,acc))}if(rest)parts.push(b1000(rest));
+ let s=(parts.join(' و')||'صفر')+' جنيها';if(pi)s+=' و'+b1000(pi)+' قرشا';return 'فقط وقدره '+s+' فقط لا غير'}
+
+// ===== شكل المستخلص الرسمي (نفس ورقة المديرية: نفس الأعمدة والمقاسات وأماكن التوقيعات) =====
+// المقاسات والأماكن متاخدة من المستخلص الورقي نفسه كنسبة من عرض الجدول.
+const CR_W=1062; // عرض المحتوى بالبكسل = ٢٨١ مم (A4 عرضي ناقص الهوامش)
+const CR_COLS=[2.4,26.8,3.3,3.3,4.7,4.1,6.3,4.1,5.1,3.2,6.1,4.3,7.6,18.8];
+// المستخلص المبدئي: نفس الشكل من غير خانتين «التنزيل او الخصم» و«الصافي بعد الخصم»، والمساحة بتروح لنوع العمل والملاحظات
+const CR_COLS_PRE=[2.4,34.7,3.3,3.3,4.7,4.1,6.3,4.1,5.1,3.2,6.1,22.8];
+// خط نسخ عربي ثابت عشان المستخلص يطلع بنفس الشكل على أي موبايل (لو النت فصل بيستخدم خط الجهاز)
+const CR_FONT_BASE='https://cdn.jsdelivr.net/npm/@fontsource/noto-naskh-arabic@5.3.0/files/noto-naskh-arabic-';
+const CR_RANGES={arabic:'U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC',latin:'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD'};
+let crFontCss=null,crFamily='Tahoma, Arial, sans-serif';
+async function crLoadFont(){if(crFontCss!==null)return crFontCss;
+ try{const faces=await Promise.all([['arabic',400],['arabic',700],['latin',400],['latin',700]].map(async([sub,w])=>{const r=await fetch(CR_FONT_BASE+sub+'-'+w+'-normal.woff2');if(!r.ok)throw new Error('font');const blob=await r.blob();const data=await new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.readAsDataURL(blob)});
+   const ff=new FontFace('CRNaskh','url('+data+')',{weight:String(w),unicodeRange:CR_RANGES[sub]});await ff.load();document.fonts.add(ff);
+   return "@font-face{font-family:'CRNaskh';font-weight:"+w+";src:url("+data+") format('woff2');unicode-range:"+CR_RANGES[sub]+"}"}));
+  crFontCss=faces.join('');crFamily="'CRNaskh', Tahoma, Arial, sans-serif"}
+ catch(e){console.warn('font fallback',e);crFontCss=''}
+ return crFontCss}
+let crCanvas=null;
+function crFit(text,widthPct,maxPt,minPt,bold){text=String(text||'');if(!text)return {pt:maxPt,wrap:false};crCanvas=crCanvas||document.createElement('canvas');const ctx=crCanvas.getContext('2d');const avail=CR_W*widthPct/100-6;
+ for(let pt=maxPt;pt>=minPt-0.001;pt-=0.2){ctx.font=(bold?'bold ':'')+pt.toFixed(1)+'pt '+crFamily;if(ctx.measureText(text).width<=avail)return {pt:+pt.toFixed(1),wrap:false}}return {pt:minPt,wrap:true}}
+// زي الورقة: البند في سطر واحد، الخط بيصغر لحد حد معين وبعدها الكلام الزيادة بيتقص
+function crCell(text,widthPct,maxPt,minPt,cls,bold){const f=crFit(text,widthPct,maxPt,minPt,bold);return `<td class="${cls||''}" style="font-size:${f.pt}pt;white-space:nowrap;text-overflow:clip">${esc(text)}</td>`}
+function crUnit(u){return {'م²':'م٢','م³':'م٣','عدد':'بالعدد'}[u]||u}
+// opts.prelim = المستخلص المبدئي اللي بيطلع مع الحصر (من غير خانات الخصومات)
+function buildClaimReport(fontCss,opts){
+ const P=!!(opts&&opts.prelim),COLS=P?CR_COLS_PRE:CR_COLS,NI=COLS.length-1;
+ const d=getData(),c=d.claim,t=c.totals;
+ const title=(c.type==='ختامي'?'مستخلص ختامي':'مستخلص جاري')+(P?' مبدئي':'')+(c.no?' ('+toAr(c.no)+')':'');
+ const remarks=String(c.remarks||'').split('\n').map(x=>x.trim());
+ let ri=0;const nextRemark=()=>remarks[ri++]||'';
+ const num=v=>arNum(v);
+ const empties=n=>'<td></td>'.repeat(n);
+ const top=c.topNote?(()=>{const rem=nextRemark();return `<tr class="cr-top"><td></td><td class="cr-desc cr-topnote">${esc(c.topNote)}</td>${empties(NI-2)}${crCell(rem,COLS[NI],7.4,5.8,'cr-notes',true)}</tr>`})():'';
+ const rows=c.items.map(ci=>{const own=ci.held?(/يعل|معل/.test(ci.notes||'')?ci.notes:('يعلى'+(ci.notes?' '+ci.notes:''))):(ci.notes||'');const rem=nextRemark();const note=[own,rem].filter(Boolean).join('\n');
+  const nf=crFit(note.split('\n').sort((a,b)=>b.length-a.length)[0],COLS[NI],7.4,5.8,true);
+  const val=P&&!num(ci.price)?'':num(ci.value);
+  return `<tr><td class="cr-no">${esc(toAr(ci.no))}</td>${crCell(ci.desc,COLS[1],8,5.8,'cr-desc',true)}<td>${num(ci.price)}</td><td>${esc(crUnit(ci.unit))}</td><td>${num(ci.contract)}</td><td>${num(ci.added)}</td><td>${num(ci.prev)}</td><td>${num(ci.cur)}</td><td>${num(ci.fin)}</td><td>${esc(ci.status||'جاري')}</td><td>${val}</td>${P?'':`<td>${num(ci.ded||0)}</td><td>${ci.held?'٠':num(ci.net)}</td>`}<td class="cr-notes" style="font-size:${nf.pt}pt;white-space:pre">${esc(note)}</td></tr>`}).join('');
+ const dots='..........................',sdots='..............';
+ const op='عملية: '+(c.operation||d.project||'');const opF=crFit(op,47.5,7.6,5.8,true);
+ const ctr='مقاولة '+(c.contractor||'');const ctrF=crFit(ctr,26.5,7.6,5.8,true);
+ // عناصر التوقيعات: [السطر بالمم من تحت الجدول, المسافة من اليمين %, النص]
+ const sig=[[2.5,1.1,`مهندس العملية ${dots}`],[2.5,29.8,`تاريخ ${sdots}`],[2.5,36.6,`مدير ادارة مراقبة التنفيذ ${dots}`],[2.5,55.6,`تاريخ ${sdots}`],[2.5,64,`مدير المديرية ${sdots}`],[2.5,74.3,`تاريخ ${sdots}`],
+  [11.5,1.1,'روجع ووجد صحيحا'],[11.5,54.6,`اقر بان هذا الحساب صحيح وان الدفعات ${dots} تمت`],
+  [21,1.2,`مدير اعمال ${sdots} رئيس القطاع ${sdots}`],[21,28.7,`تاريخ ${sdots}`],[21,36.8,`موافقة المقاول ${sdots}`],[21,51.6,`تاريخ ${sdots}`],[21,64,`كاتب الحسابات ${sdots}`],[21,74.3,`تاريخ ${sdots}`],
+  [25,23.9,'اقر بان اقبل هذا المستخلص وليس لي مطالبة ضد المحافظة بشأنه'],[25,55.8,`ملحوظة البند ${sdots} غير منظور في العقد وقد تمت الموافقة على ${dots}`],
+  [33,42.1,'موافقة المقاول'],[39,1.4,'تم تحريره بمركز المعلومات بالمديرية'],[39,58.5,`يدفع ${sdots} تحت الحساب`]];
+ const el=document.createElement('div');el.id='claimReport';
+ el.innerHTML=`<style>
+${fontCss||''}
+#claimReport{direction:rtl;font-family:${crFamily};color:#000;background:#fff;font-size:8pt;line-height:1.25;width:${CR_W}px;position:relative}
+#claimReport *{box-sizing:border-box}
+#claimReport .cr-head{position:relative;height:14.5mm}
+#claimReport .cr-head div{position:absolute;white-space:nowrap;font-weight:bold}
+#claimReport .cr-auth{right:0;top:1.8mm;font-size:8pt;line-height:1.3}
+#claimReport .cr-auth u{text-underline-offset:2px}
+#claimReport table{width:100%;border-collapse:collapse;table-layout:fixed;border:1.4px solid #000}
+#claimReport th,#claimReport td{border:1px solid #000;padding:.4mm .7mm;text-align:center;vertical-align:middle;font-size:7.8pt;line-height:1.15;overflow:hidden}
+#claimReport th{font-weight:bold;font-size:7.4pt;line-height:1.3;height:7mm}
+#claimReport thead{display:table-header-group}
+#claimReport tbody tr{height:4.7mm;break-inside:avoid;page-break-inside:avoid}
+#claimReport td{font-weight:bold}
+#claimReport td.cr-desc{text-align:right}
+#claimReport td.cr-notes{text-align:right;font-weight:bold;line-height:1.2}
+#claimReport td.cr-topnote{font-size:8.8pt;line-height:1.45;white-space:normal;padding:1mm .9mm}
+#claimReport td.cr-no{font-size:9.5pt}
+#claimReport .cr-total td{font-weight:bold;border-top:1.4px solid #000}
+#claimReport .cr-words{text-align:right!important;font-size:8.4pt;padding-right:2mm!important}
+#claimReport .cr-sign{position:relative;height:56mm;font-size:7.6pt;font-weight:bold}
+#claimReport .cr-sign div{position:absolute;white-space:nowrap}
+#claimReport .cr-sign .c{transform:translateX(50%);font-size:8.6pt}
+</style>
+<div class="cr-head">
+<div class="cr-auth">${esc(c.authority1)}<br>${esc(c.authority2)}<br><u>${esc(c.authority3)}</u></div>
+<div style="top:0;right:34.6%;transform:translateX(50%);font-size:9.4pt">${esc(title)}</div>
+<div style="top:4.9mm;right:32.5%;font-size:${ctrF.pt}pt">${esc(ctr)}</div>
+<div style="top:0;right:51.6%;font-size:${opF.pt}pt">${esc(op)}</div>
+<div style="top:4.4mm;right:60.5%;font-size:7.8pt">المدة من &nbsp;&nbsp;&nbsp;&nbsp; ${arDate(c.from)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; حتى &nbsp;&nbsp;&nbsp;&nbsp; ${arDate(c.to)}</div>
+</div>
+<table><colgroup>${COLS.map(w=>`<col style="width:${w}%">`).join('')}</colgroup>
+<thead><tr><th>بند رقم</th><th>نوع العمل</th><th rowspan="2">فئة</th><th rowspan="2">الوحدة</th><th colspan="3">الكميات</th><th rowspan="2">كميات الاعمال التي انجزت في هذه المدة</th><th rowspan="2">الكميات النهائية الى اليوم</th><th rowspan="2">الاعمال الجارية او التي انتهت</th><th rowspan="2">قيمة الاعمال الاجمالية الى اليوم</th>${P?'':'<th rowspan="2">التنزيل او الخصم</th><th rowspan="2">الصافي بعد الخصم</th>'}<th>ملاحظات</th></tr>
+<tr><th></th><th></th><th>المنظور</th><th>الاعمال المضافة</th><th>السابق اجازتها</th><th></th></tr></thead>
+<tbody>${top}${rows}
+<tr class="cr-total"><td colspan="10" class="cr-words">الاجمالي ${t.value?esc(tafqeet(t.value)):''}</td><td>${P&&!t.value?'':num(t.value)}</td>${P?'':`<td>${t.ded?num(t.ded):''}</td><td>${num(t.net)}</td>`}<td></td></tr></tbody></table>
+<div class="cr-sign keep">${sig.map(s=>`<div style="top:${s[0]}mm;right:${s[1]}%">${esc(s[2])}</div>`).join('')}<div class="c" style="top:46.5mm;right:24.6%">${esc(c.approveNote)}</div><div class="c" style="top:51.5mm;right:24.6%">${esc(c.approver)}</div></div>`;
+ return el}
+
+// ===== كشف الحصر بشكل «نموذج حصر الكميات والمساحات» (زي النموذج المعتمد عندنا) =====
+// القياس الواحد ممكن يتحسب لأكتر من بند في المقايسة: اكتب رقم البند «1+2»
+function splitNos(no){return String(no||'').split(/\s*[+،,]\s*/).map(x=>x.trim()).filter(Boolean)}
+function surveySums(){const m={};document.querySelectorAll('.street').forEach(st=>st.querySelectorAll('.item').forEach(it=>{const nos=splitNos(it.querySelector('.item-number').value),name=it.querySelector('.item-name').value.trim();const keys=nos.length?nos:[claimKey('',name)].filter(Boolean);const sn=st.querySelector('.street-name').value.trim();
+ keys.forEach(key=>{const o=m[key]||(m[key]={qty:0,unit:it.querySelector('.unit').value,name,no:nos.length?key:'',streets:[]});o.qty+=Number(it.dataset.total||0);if(!o.name&&name)o.name=name;if(sn&&!o.streets.includes(sn))o.streets.push(sn)})}));return m}
+function hsF2(v){return (Number(v)||0).toFixed(2)}
+function hsQ(v){v=r2(v);return Number.isInteger(v)?String(v):v.toFixed(2)}
+function hsDate(v){if(!v)return '';const a=String(v).split('-');return a.length===3?`${a[2]}-${a[1]}-${a[0]}`:v}
+function hsStreetsLabel(d){const n=d.streets.map(s=>String(s.name||'').trim().replace(/^شارع\s+/,'')).filter(Boolean);return n.length?n.join(' و '):(d.subProject||d.project||'')}
+function buildHasrReport(font){
+ font=font||{css:'',family:'Tahoma, Arial, sans-serif'};
+ const d=getData(),sums=surveySums();
+ const descOf=nos=>{for(const k of nos){const ci=claim.items.find(x=>x.key===k);if(ci&&ci.desc)return ci.desc}return ''};
+ let blocks='';
+ d.streets.forEach((st,si)=>{const sn=String(st.name||'').trim()||('الشارع '+(si+1));
+  st.items.forEach((it,ii)=>{const mode=unitMode(it.unit),name=String(it.name||'').trim()||('البند '+(ii+1)),rows=it.rows||[];
+   const head=`<div class="hs-st">الشارع: <b>${esc(sn)}</b></div>`,multi=d.streets.length>1;
+   if(mode==='area'||mode==='vol'){
+    const wc=Math.max(1,Math.min(4,it.widthCount||1)),vol=mode==='vol';
+    const cols=['الطول (م)'].concat(Array.from({length:wc},(_,i)=>`العرض ${i+1} (م)`),['المتوسط (م)'],vol?['العمق (م)','الحجم (م³)']:['المسطح (م²)']);
+    const body=rows.map(r=>{const ws=r.widths||[];return `<tr><td>${esc(String(r.length??'').trim())}</td>${Array.from({length:wc},(_,i)=>`<td>${ws[i]!==''&&ws[i]!=null?hsF2(ws[i]):''}</td>`).join('')}<td>${hsF2(r.avg)}</td>${vol?`<td>${esc(String(r.depth??'').trim())}</td>`:''}<td>${hsF2(r.result)}</td></tr>`}).join('');
+    blocks+=`<section class="hs-block keep">${head}<div class="hs-item">اسم البند: ${esc(name)}</div><table class="hs-t"><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>${body}<tr class="hs-tot"><td>${vol?'إجمالي الحجم':'إجمالي المسطح'}</td><td colspan="${cols.length-2}"></td><td>${hsF2(it.total)} ${vol?'م³':'م²'}</td></tr></tbody></table></section>`;
+   }else{
+    const desc=descOf(splitNos(it.number))||name;
+    const body=rows.length>1?rows.map(r=>`<tr><td>${esc(desc)}${r.desc?' ('+esc(r.desc)+')':''}</td><td>${hsQ(r.result)}</td><td>${esc(it.unit)}</td></tr>`).join('')+`<tr class="hs-tot"><td>الإجمالي</td><td>${hsQ(it.total)}</td><td>${esc(it.unit)}</td></tr>`
+     :`<tr><td>${esc(desc)}${rows[0]&&rows[0].desc?' ('+esc(rows[0].desc)+')':''}</td><td>${hsQ(it.total)}</td><td>${esc(it.unit)}</td></tr>`;
+    blocks+=`<section class="hs-block keep">${multi?head:''}<div class="hs-item">${esc(name)}</div><table class="hs-t hs-c"><colgroup><col style="width:59%"><col style="width:15%"><col style="width:26%"></colgroup><thead><tr><th>اسم البند</th><th>الكمية</th><th>وحدة القياس</th></tr></thead><tbody>${body}</tbody></table></section>`;
+   }
+  })});
+ const keys=Object.keys(sums).sort((a,b)=>natCmp(sums[a],sums[b]));
+ const sumRows=keys.map(k=>{const s=sums[k];return `<tr><td>${esc(s.no||'')}</td><td>${esc(descOf([k])||s.name)}</td><td>${hsQ(s.qty)}</td><td>${esc(s.unit)}</td></tr>`}).join('');
+ const el=document.createElement('div');el.id='hasrReport';
+ el.innerHTML=`<style>${font.css||''}
+#hasrReport{direction:rtl;font-family:${font.family};color:#111;background:#fff;font-size:10pt;line-height:1.5}
+#hasrReport *{box-sizing:border-box}
+#hasrReport h1{font-size:19pt;font-weight:700;text-align:center;margin:2mm 0 4mm}
+#hasrReport .hs-sub{text-align:center;font-size:12.5pt;color:#444;margin:0 0 9mm}
+#hasrReport .hs-block{margin:0 0 9mm}
+#hasrReport .hs-st{font-size:11pt;color:#333;margin:0 0 1.5mm}#hasrReport .hs-st b{font-weight:700;color:#111}
+#hasrReport .hs-item{font-size:13.5pt;font-weight:700;margin:0 0 3.5mm}
+#hasrReport table{width:100%;border-collapse:collapse;table-layout:fixed}
+#hasrReport th,#hasrReport td{border:1px solid #222;padding:0 3.5mm;height:9.2mm;text-align:center;vertical-align:middle;overflow-wrap:anywhere;line-height:1.35}
+#hasrReport th{text-align:right}
+#hasrReport th{background:#f2f3f5;font-weight:700;font-size:9.5pt}
+#hasrReport td{font-size:10.5pt}
+#hasrReport .hs-tot td:first-child{text-align:right}
+#hasrReport .hs-tot td{font-weight:700}
+#hasrReport .hs-c th,#hasrReport .hs-c td,#hasrReport .hs-sumt td,#hasrReport .hs-sumt th{text-align:center}
+#hasrReport .hs-sumt th:first-child{text-align:right}
+#hasrReport .hs-sum h2{font-size:13pt;font-weight:700;margin:1mm 0 4mm;text-align:right}
+#hasrReport .hs-sumt td{height:8.4mm}
+#hasrReport .hs-sumt td:nth-child(2){padding:0 2mm}
+</style>
+<h1>نموذج حصر الكميات والمساحات — ${esc(d.project||d.subProject||'')}</h1>
+<div class="hs-sub">التاريخ: <span dir="ltr">${esc(hsDate(d.date))}</span> | المساح: ${esc(d.surveyor||'')}</div>
+${blocks||'<p>لا توجد بنود قياس مسجلة.</p>'}
+${keys.length?`<section class="hs-sum pb"><h2>الحصر الخاص بشارع: اجمالي كميات ${esc(hsStreetsLabel(d))}</h2><table class="hs-sumt"><colgroup><col style="width:14%"><col style="width:58%"><col style="width:13%"><col style="width:15%"></colgroup><thead><tr><th>رقم البند</th><th>اسم البند</th><th>الكميات</th><th>المساحة</th></tr></thead><tbody>${sumRows}</tbody></table></section>`:''}`;
+ return el}
+
+// PDF واحد فيه: كشف الحصر (طولي) + الإجمالي في صفحة لوحده + المستخلص المبدئي (عرضي)
+async function makeSurveyPdf(){
+ const sums=surveySums();syncClaimItems(sums);
+ const [sans,naskh]=await Promise.all([dkLoadFont('sans'),crLoadFont()]);
+ const parts=[{el:buildHasrReport(sans),orientation:'portrait',margin:18,breakAt:'tr,.hs-block,.hs-sum,h1',numbered:true,footer:$('surveyNo').value.trim()}];
+ if(claim.items.length)parts.push({el:buildClaimReport(naskh,{prelim:true}),orientation:'landscape',breakAt:'tr,.cr-sign',fitMin:0.72});
+ const blob=await dkPdfParts(parts);
+ return {file:new File([blob],dkFileName(buildPdfFilename())+'.pdf',{type:'application/pdf'}),kind:'survey',ref:$('surveyNo').value.trim()};
+}
+function surveyHasItems(){return [...document.querySelectorAll('.item')].some(it=>Number(it.dataset.total||0)>0)}
+// زرار «PDF الحصر»: بيطلع الملف على طول بالبيانات اللي اتكتبت (حتى لو لسه متحفظش في السيستم)
+function surveyPdfNow(){updateSummary();if(!surveyHasItems()){toast('اكتب قياسات الحصر الأول');return}
+ dkSendSheet({title:'📐 PDF الحصر والمستخلص المبدئي',hint:'الملف فيه كشف الحصر، وإجمالي الكميات، والمستخلص المبدئي.',text:surveyWaText(),makePdf:makeSurveyPdf,auto:true,onPrint:printHasr})}
+function printHasr(){let win=window.open('about:blank','_blank');if(!win){toast('المتصفح منع نافذة الطباعة. اسمح بالنوافذ المنبثقة ثم أعد المحاولة');return}
+ win.document.write('<p style="font-family:Tahoma,Arial;direction:rtl;padding:24px;font-size:18px">جارٍ تجهيز كشف الحصر…</p>');
+ dkLoadFont('sans').then(font=>{const html='<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(buildPdfFilename())+'</title><style>@page{size:A4 portrait;margin:18mm}html,body{margin:0;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}#printActions{font-family:Tahoma,Arial,sans-serif;direction:rtl;padding:12px;margin-bottom:12px;background:#f1f3f5;border-bottom:1px solid #ccc}#printActions button{font:bold 16px Tahoma,Arial,sans-serif;padding:12px 18px;margin-left:8px;border:0;border-radius:8px;background:#174a37;color:white}#printActions span{font-size:13px;color:#333}#hasrReport{max-width:174mm;margin:auto}.pb{break-before:page;page-break-before:always}.keep{break-inside:avoid;page-break-inside:avoid}@media print{#printActions{display:none!important}}</style></head><body><div id="printActions"><button onclick="window.print()">طباعة / حفظ PDF</button><span>اختار «حفظ كملف PDF». المستخلص المبدئي بيتطبع من زرار طباعة المستخلص.</span></div>'+buildHasrReport(font).outerHTML+'</body></html>';
+  win.document.open();win.document.write(html);win.document.close()})}
+
+function claimFileName(){const c=claim;return (`مستخلص ${c.type||'جاري'} ${c.no||''} ${c.operation||$('project').value||''}`).replace(/[\\/:*?"<>|]/g,'-').replace(/\s+/g,' ').trim().slice(0,90)}
+function claimReady(){const sums=surveySums();syncClaimItems(sums);if(!claim.items.length){toast('مفيش بنود في المستخلص');return false}const miss=claim.items.filter(ci=>!num(ci.price));if(miss.length&&!confirm(`فيه ${miss.length} ${miss.length===1?'بند':'بنود'} من غير فئة (سعر)، وقيمتهم هتطلع صفر. تكمل؟`))return false;return true}
+function printClaim(){if(!claimReady())return;let win=window.open('about:blank','_blank');if(!win){toast('المتصفح منع نافذة الطباعة. اسمح بالنوافذ المنبثقة ثم أعد المحاولة');return}win.document.write('<p style="font-family:Tahoma,Arial;direction:rtl;padding:24px;font-size:18px">جارٍ تجهيز المستخلص…</p>');crLoadFont().then(css=>{
+ const html='<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(claimFileName())+'</title><style>@page{size:A4 landscape;margin:8mm}html,body{margin:0;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}#printActions{font-family:Tahoma,Arial,sans-serif;direction:rtl;padding:12px;margin-bottom:12px;background:#f1f3f5;border-bottom:1px solid #ccc}#printActions button{font:bold 16px Tahoma,Arial,sans-serif;padding:12px 18px;margin-left:8px;border:0;border-radius:8px;background:#174a37;color:white}#printActions span{font-size:13px;color:#333}@media print{#printActions{display:none!important}}#claimReport{width:1062px}</style></head><body><div id="printActions"><button onclick="fitPage();window.print()">طباعة / حفظ PDF</button><span>اختار «حفظ كملف PDF» واتأكد إن الاتجاه أفقي (Landscape).</span></div>'+buildClaimReport(css).outerHTML+'<script>function fitPage(){var r=document.getElementById("claimReport");r.style.zoom="";var avail=194*3.78,h=r.scrollHeight,fit=avail*0.9;if(h>fit&&fit/h>=0.66)r.style.zoom=(fit/h).toFixed(3)}fitPage();setTimeout(fitPage,300);addEventListener("load",fitPage);addEventListener("beforeprint",fitPage)<\/script></body></html>';
+ win.document.open();win.document.write(html);win.document.close();toast('اتفتح المستخلص. اضغط طباعة / حفظ PDF')})}
+async function makeClaimPdf(){const css=await crLoadFont();const blob=await dkHtmlToPdf(buildClaimReport(css),{orientation:'landscape',breakAt:'tr,.cr-sign,.cr-foot',fitMin:0.72});return {file:new File([blob],dkFileName(claimFileName())+'.pdf',{type:'application/pdf'}),kind:'claimForm',ref:'م-'+($('surveyNo').value.trim()||claim.no||'')}}
+function claimSummaryText(){const c=claimExport(),t=c.totals;let m=`*${c.type==='ختامي'?'المستخلص الختامي':'مستخلص جاري'} ${c.no?'('+c.no+')':''}*\nالعملية: ${c.operation||$('project').value}\nالمدة: من ${c.from||'..'} إلى ${c.to||'..'}\n\n`;
+ c.items.forEach(ci=>{m+=`• بند ${ci.no||'بدون رقم'}: هذه المدة ${ci.cur} ${ci.unit} · النهائي ${ci.fin} · ${arMoney(ci.value)} ج.م${ci.held?' (معلّى)':''}\n`});
+ m+=`\nقيمة الأعمال الإجمالية: ${arMoney(t.value)} ج.م\nالخصم: ${arMoney(t.ded)} ج.م\nالصافي بعد الخصم: ${arMoney(t.net)} ج.م\n${tafqeet(t.value)}\nرقم الحصر: ${$('surveyNo').value}`;return m}
+function shareClaimPdf(){if(!claimReady())return;dkSendSheet({title:'🧾 PDF المستخلص',hint:'المستخلص بالشكل الرسمي بتاع المديرية (بالخصومات والصافي).',text:claimSummaryText(),makePdf:makeClaimPdf,auto:true,onPrint:printClaim})}
+
+// ================= المسودة على الجهاز (IndexedDB) =================
+let meta={serverNo:'',savedAt:'',dirty:false};let restoringDraft=false,draftTimer=null;
+const idb={db:null,open(){if(this.db)return Promise.resolve(this.db);return new Promise((res,rej)=>{if(!window.indexedDB)return rej('no idb');let r=indexedDB.open('damarany_survey',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>{this.db=r.result;res(this.db)};r.onerror=()=>rej(r.error)})},async get(k){try{let db=await this.open();return await new Promise(res=>{let q=db.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>res(q.result);q.onerror=()=>res(null)})}catch(e){try{return JSON.parse(localStorage.getItem('damarany_survey_'+k)||'null')}catch(_){return null}}},async set(k,v){try{let db=await this.open();await new Promise((res,rej)=>{let t=db.transaction('kv','readwrite');t.objectStore('kv').put(v,k);t.oncomplete=res;t.onerror=()=>rej(t.error)})}catch(e){try{localStorage.setItem('damarany_survey_'+k,JSON.stringify(v))}catch(_){}}}};
+async function saveDraftNow(){if(restoringDraft)return;await idb.set('draft',{data:getData(),meta,at:Date.now()})}
+function scheduleDraftSave(){if(restoringDraft)return;clearTimeout(draftTimer);draftTimer=setTimeout(saveDraftNow,700)}
+function markDirty(){if(restoringDraft)return;meta.dirty=true;renderSync();scheduleDraftSave()}
+document.addEventListener('input',e=>{if(e.target.closest('#app')&&e.target.type!=='file'&&e.target.id!=='importFile')markDirty()});
+document.addEventListener('change',e=>{if(e.target.closest('#app')&&e.target.type!=='file')markDirty()});
+
+function renderSync(mode,msg){let box=$('syncBox');if(!box)return;if(!API_URL){box.className='dk-sync info';box.innerHTML='<span>الحفظ في السيستم لسه مش متفعل. الحصر محفوظ على الجهاز ده بس.</span>';return}
+ if(mode==='error'){box.className='dk-sync err';box.innerHTML=`<span>❌ ${dkEsc(msg||'حصل خطأ')}. الحصر محفوظ على الموبايل، جرب تاني.</span><button type="button" onclick="saveToServer()">إعادة المحاولة</button>`;return}
+ if(meta.serverNo&&!meta.dirty&&meta.serverNo===$('surveyNo').value.trim()){box.className='dk-sync ok';box.innerHTML=`<span>✓ الحصر ${dkEsc(meta.serverNo)} محفوظ في السيستم (${dkEsc(meta.savedAt)})</span>`;return}
+ box.className='dk-sync wait';box.innerHTML=`<span>📝 ${meta.serverNo?'فيه تعديلات لسه متحفظتش في السيستم':'الحصر محفوظ على الموبايل بس، المكتب لسه مش شايفه'}.</span><button type="button" onclick="saveToServer()">☁️ حفظ في السيستم</button>`}
+
+// ================= الحفظ في السيستم =================
+async function getNewSurveyNo(){try{let r=await dkCall('survey.nextNo',{});return r.surveyNo}catch(e){let d=new Date(),p=n=>String(n).padStart(2,'0');return `ED-Q-${d.getFullYear()}-${p(d.getMonth()+1)}${p(d.getDate())}${p(d.getHours())}${p(d.getMinutes())}`}}
+async function saveToServer(){
+ if(!API_URL){toast('الحفظ في السيستم لسه مش متفعل');return}
+ if(!$('project').value.trim()){toast('اكتب اسم المشروع الرئيسي الأول');$('project').focus();return}
+ await dkEnsurePin({title:'رمز الموقع'});
+ try{
+  if(!$('surveyNo').value.trim()){dkBusy(true,'جارٍ تجهيز رقم الحصر…');$('surveyNo').value=await getNewSurveyNo()}
+  let no=$('surveyNo').value.trim();
+  // 1) رفع الصور والكروكي اللي لسه على الموبايل
+  let jobs=[];
+  document.querySelectorAll('.street').forEach((st,i)=>{let name=st.querySelector('.street-name').value.trim()||('الشارع '+(i+1));[...st.querySelectorAll('.photo-grid img')].forEach((img,j)=>{if(/^data:/.test(img.getAttribute('src')))jobs.push({type:'photo',st,img,name,j})});if(/^data:/.test(st.dataset.sketch||''))jobs.push({type:'sketch',st,name})});
+  for(let k=0;k<jobs.length;k++){let job=jobs[k];dkBusy(true,`جارٍ رفع الصور والملفات ${k+1} من ${jobs.length}…`);
+   if(job.type==='photo'){let p=dkDataUrlParts(job.img.getAttribute('src'));let r=await dkCall('file.upload',{surveyNo:no,street:job.name,kind:'photo',file:{name:`${job.name} صورة ${job.j+1}.jpg`,mime:p.mime,base64:p.base64}});job.img.setAttribute('src',r.thumb)}
+   else{let st=job.st,p=dkDataUrlParts(st.dataset.sketch);let r=await dkCall('file.upload',{surveyNo:no,street:job.name,kind:'sketch',file:{name:st.dataset.sketchName||`${job.name} كروكي`,mime:p.mime,base64:p.base64}});st.dataset.sketch=(st.dataset.sketchType||'').startsWith('image/')?r.thumb:r.url;st.dataset.sketchUrl=r.url;renderSketch(st)}
+   await saveDraftNow()}
+  // 2) حفظ بيانات الحصر
+  dkBusy(true,'جارٍ حفظ الحصر…');
+  let d=getData();let r=await dkCall('survey.save',{survey:d,overwrite:meta.serverNo===no});
+  if(r.exists){dkBusy(false);let ex=r.existing||{};
+   if(confirm(`رقم الحصر ${no} محفوظ قبل كده:\nالمشروع: ${ex.project||'—'}\nالتاريخ: ${ex.date||'—'}\nآخر حفظ: ${ex.savedAt||'—'} ${ex.savedBy?'بواسطة '+ex.savedBy:''}\n\nاضغط OK عشان تستبدله بالحصر ده.\nاضغط إلغاء عشان ناخد رقم جديد ومنمسحش القديم.`)){dkBusy(true,'جارٍ حفظ الحصر…');r=await dkCall('survey.save',{survey:getData(),overwrite:true})}
+   else{dkBusy(true,'جارٍ أخد رقم جديد…');$('surveyNo').value=await getNewSurveyNo();no=$('surveyNo').value.trim();r=await dkCall('survey.save',{survey:getData(),overwrite:false});if(r.exists)throw dkErr('ERROR','الرقم الجديد اتاخد في نفس اللحظة، جرب تاني')}}
+  meta={serverNo:no,savedAt:r.savedAt||new Date().toLocaleString('ar-EG'),dirty:false};await saveDraftNow();dkBusy(false);renderSync();dkSendSheet({title:'✓ الحصر اتحفظ في السيستم',hint:'الـ PDF بيتجهز دلوقتي بالبيانات اللي اتحفظت (الحصر + المستخلص المبدئي).',text:surveyWaText(),makePdf:makeSurveyPdf,auto:true,onPrint:printHasr})
+ }catch(e){dkBusy(false);await saveDraftNow();renderSync('error',e.code==='NETWORK'?'مفيش اتصال بالإنترنت':e.message)}
+}
+
+// ================= فتح حصر محفوظ / حصر جديد =================
+async function openSaved(){
+ if(!API_URL){toast('الحفظ في السيستم لسه مش متفعل');return}
+ await dkEnsurePin({title:'رمز الموقع'});
+ let list;try{dkBusy(true,'جارٍ تحميل الحصورات…');list=(await dkCall('survey.list',{})).list}catch(e){dkBusy(false);toast(e.message);return}dkBusy(false);
+ let ov=document.createElement('div');ov.className='dk-overlay';
+ ov.innerHTML=`<div class="dk-sheet"><h3>فتح حصر محفوظ</h3><input id="svSearch" placeholder="ابحث برقم الحصر أو المشروع أو المساح"><div id="svList" style="margin-top:10px"></div><button type="button" class="dk-btn light" id="svClose">إغلاق</button></div>`;
+ document.body.appendChild(ov);
+ const draw=q=>{q=(q||'').trim();let rows=list.filter(x=>!q||[x.surveyNo,x.project,x.subProject,x.surveyor].join(' ').includes(q));ov.querySelector('#svList').innerHTML=rows.length?rows.map(x=>`<button type="button" class="sv-row" data-no="${dkEsc(x.surveyNo)}"><b>${dkEsc(x.surveyNo)}</b> · ${dkEsc(x.type||'')}${x.claimNo?' · مستخلص '+dkEsc(x.claimNo):''}<br><span>${dkEsc(x.project||'')}${x.subProject?' / '+dkEsc(x.subProject):''} · ${dkEsc(x.date||'')} · ${dkEsc(x.surveyor||'')}</span></button>`).join(''):'<p class="dk-muted">مفيش حصورات بالبحث ده.</p>'};
+ draw('');ov.querySelector('#svSearch').oninput=e=>draw(e.target.value);ov.querySelector('#svClose').onclick=()=>ov.remove();
+ ov.querySelector('#svList').onclick=async e=>{let b=e.target.closest('.sv-row');if(!b)return;
+  if(meta.dirty&&!confirm('الحصر المفتوح دلوقتي فيه تعديلات متحفظتش في السيستم. تكمل وتفتح الحصر التاني؟'))return;
+  ov.remove();try{dkBusy(true,'جارٍ فتح الحصر…');let r=await dkCall('survey.get',{surveyNo:b.dataset.no});loadData(r.survey);meta={serverNo:r.survey.surveyNo,savedAt:r.savedAt,dirty:false};await saveDraftNow();renderSync();toast('تم فتح الحصر '+r.survey.surveyNo)}catch(err){toast(err.message)}finally{dkBusy(false)}};
+}
+async function newSurvey(){
+ if(meta.dirty&&!confirm('الحصر الحالي فيه تعديلات متحفظتش في السيستم. تبدأ حصر جديد وتسيبها؟'))return;
+ if(!meta.dirty&&!confirm('تبدأ حصر جديد فاضي؟'))return;
+ let keep={project:$('project').value,subProject:$('subProject').value,surveyor:$('surveyor').value};
+ const ce=claimExport();let nextClaim=Object.assign({},ce,{items:[],from:'',to:''});
+ if(ce.items.some(ci=>num(ci.price)||ci.fin>0)){const nn=parseInt(ce.no,10);if(confirm(`تنقل بيانات المستخلص للحصر الجديد${isNaN(nn)?'':' كمستخلص رقم '+(nn+1)}؟\nالفئات والمنظور هيتنقلوا، و«السابق إجازتها» هيبقى النهائي بتاع المستخلص ده.\n\nاضغط إلغاء لو الحصر الجديد مش المستخلص اللي بعده.`))nextClaim=rollClaim(ce)}
+ loadData(Object.assign({surveyNo:'',date:new Date().toISOString().slice(0,10),streets:[],claim:nextClaim},keep));addStreet();
+ meta={serverNo:'',savedAt:'',dirty:false};
+ if(API_URL){$('surveyNo').value=await getNewSurveyNo()}else{let d=new Date(),p=n=>String(n).padStart(2,'0');$('surveyNo').value=`ED-Q-${d.getFullYear()}-${p(d.getMonth()+1)}${p(d.getDate())}${p(d.getHours())}${p(d.getMinutes())}`}
+ await saveDraftNow();renderSync();window.scrollTo({top:0,behavior:'smooth'});toast('بدأنا حصر جديد')
+}
+
+function surveyWaText(){const d=getData();let m=`*EL DAMARANY · حصر كميات*\nرقم الحصر: ${d.surveyNo} (${d.surveyType})\nالمشروع: ${d.project}${d.subProject?' / '+d.subProject:''}\nالتاريخ: ${d.date}\nالمساح: ${d.surveyor||'..'}\n`;
+ d.streets.forEach((st,i)=>{m+=`\n📍 ${st.name||'الشارع '+(i+1)}\n`;st.items.forEach(it=>{m+=`• ${it.number?'بند '+it.number+': ':''}${it.name||'بدون اسم'} = ${Number(it.total).toFixed(2)} ${it.unit}\n`})});
+ const c=d.claim;if(c&&c.items.some(ci=>num(ci.price)))m+=`\n🧾 مستخلص ${c.type} (${c.no}) مبدئي: قيمة الأعمال ${arMoney(c.totals.value)} ج.م\n`;
+ return m+(meta.serverNo===d.surveyNo&&!meta.dirty?`\n✓ اتحفظ في السيستم ${dkNowAr()}`:`\n📝 لسه متحفظش في السيستم`)}
+// ================= بداية الصفحة =================
+(async()=>{
+ let draft=await idb.get('draft');
+ if(draft&&draft.data){loadData(draft.data);meta=Object.assign({serverNo:'',savedAt:'',dirty:false},draft.meta||{});if((draft.data.streets||[]).length===0)addStreet();if(meta.dirty)toast('رجّعنا الحصر اللي كنت شغال عليه')}
+ renderSync();renderClaim();
+ if(API_URL){await dkEnsurePin({title:'رمز الموقع',hint:'اطلبه من المكتب. بيتطلب مرة واحدة على الموبايل ده.'});if(!$('surveyNo').value.trim()){$('surveyNo').value=await getNewSurveyNo();await saveDraftNow()}}
+ else if(!$('surveyNo').value.trim()){let d=new Date(),p=n=>String(n).padStart(2,'0');$('surveyNo').value=`ED-Q-${d.getFullYear()}-${p(d.getMonth()+1)}${p(d.getDate())}${p(d.getHours())}${p(d.getMinutes())}`}
+ renderSync();
+})();
+
+if(!document.querySelector(".street"))addStreet();
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script></body></html>
